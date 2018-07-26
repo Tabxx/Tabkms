@@ -1,0 +1,65 @@
+*{margin: 0;list-style-type:none;font-family:Helvetica,FreeSans,"Liberation Sans",Helmet,Arial,sans-serif,"??бу??????",NSimSun,"??????",SimSun;}
+.mainPart{background: white;height: 250px;margin: 0 auto;position: relative;overflow: hidden;}
+.mainFoot{position: absolute;bottom: 0;background: #eeeeee;width: 100%;height: 25px;z-index: 999}
+.mainFoot span{font-size: 10px;color: #666;width: 100%;text-align: center;display: inline-block;cursor: pointer;}
+.options{width: 900px;margin-left: 40px;}
+.options div{background: #666;color: white;height: 25px;margin: 10px 10px 0 0;float: left;position: relative;line-height: 25px;font-size: 10px;width: auto;text-indent: 10px;}
+.o_close{cursor: pointer;color: #ccc;margin: 0 8px auto}
+.o_close:hover {color: white;}
+.topPart,.mainPart{margin-bottom: 10px;}
+.mainTop{width: 100%;height: 50px;background: #eeeeee;}
+.check input{margin-left: 30px;height: 27px;border: none;width: 170px;}
+.getNum{width: 200px;display: inline-block;font-size: 11px;color: #444;}
+.getNum span{font-size: 25px;margin-left: 30px;}
+.mainMiddle{width: 1300px;height: 200px;margin-left: 10px;position: absolute;left: -325px}
+.leftBtn{width: 30px;height: 80px;cursor: pointer;color:#ccc;background: #eee;font-weight: bolder;font-size: 20px;line-height: 80px;text-align: center;position: absolute;z-index: 999;top: 45%}
+.rightBtn{width: 30px;height: 80px;cursor: pointer;color:#666;background: #eee;font-weight: bolder;font-size: 20px;line-height: 80px;text-align: center;position: absolute;z-index: 999;top: 45%;right: 0}
+.m_point{width: 310px;float: left;margin-left: 15px;}
+.m_point2{width: 310px;float: left;margin-left: 15px;}
+.m_title{font-weight: bold;font-size: 14px;margin:15px 0 0 20px;height: 20px;line-height: 20px}
+.changeBg{background: #eee;height:30px;}
+.clickBg{background: #9bdaf3;height:30px;}
+.skillbar {
+    position:relative;
+    display:block;
+    width: 310px;
+    margin: 10px 0 0 15px;
+    cursor: pointer;
+    height:32px;
+}
+.m_point:hover .barbg{background: #eee;}
+.skillbar:hover .barbg{background: #9bdaf3;}
+.skillbar:hover .changeBg{background: #9bdaf3;}
+.skillbar-title {
+    position:absolute;
+    top:0;
+    left:0;
+    width:210px;
+    font-weight:bold;
+    font-size:13px;
+}
+.skillbar-title span {
+    display:block;
+    font-weight: 100;
+    font-size: 13px;
+    color: #111;
+    padding:0 10px;
+    height:32px;
+    line-height:32px;
+    cursor: pointer;
+}
+.barbg {
+    height:30px;
+    width:0;
+    background:#9bdaf3;
+}
+.skill-bar-percent {
+    position:absolute;
+    right:35px;
+    top:0;
+    font-size:11px;
+    height:35px;
+    line-height:35px;
+    color:#ffffff;
+    color:rgba(0, 0, 0, 0.4);
+}

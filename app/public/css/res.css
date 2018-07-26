@@ -1,0 +1,11 @@
+ .tab-group label{
+ 	color: #999;
+ }
+ .tab-group ul li{
+ 	float: left;
+ 	margin-right: 30px;
+ 	line-height: 28px;
+ }
+ .tab-group ul li a:hover{
+ 	color: #01a650;
+ }

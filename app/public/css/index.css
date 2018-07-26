@@ -1,0 +1,55 @@
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover{
+    color: #55B92A;
+}
+header{
+	background-color: #fff;
+}
+
+.nav-main a,
+.nav-main a > i,
+.nav-main ul a{
+	color: #fff;
+}
+
+.tab-nav{
+	padding: 0 50px;
+	font-size: 16px;
+	overflow: hidden;
+	float: left;
+}
+
+.tab-nav2{
+	padding: 0 50px;
+	font-size: 14px;
+	overflow: hidden;
+	float: right;
+}
+
+.tab-nav li,
+.tab-nav2 li{
+	float: left;
+}
+
+.tab-nav li a,
+.tab-nav2 li a{
+	display: inline-block;
+	padding: 14px 0;
+	margin-right: 35px;
+}
+
+.tab-nav2 li a{
+	margin-right: 20px;
+}
+
+.tab-active{
+	color: #00A650;
+}
+
+.bg-primary-lighter{
+	background-color: #fff;
+	padding: 0 !important;
+}
+
+.bg-primary{
+	background: rgba(255,255,255,0);
+}
