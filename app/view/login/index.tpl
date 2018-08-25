@@ -44,7 +44,7 @@
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <div class="form-material form-material-primary floating">
-                                    <input class="form-control" value="{{ username }}" type="text" id="login-username" name="username">
+                                    <input class="form-control" value="{{ result.username }}" type="text" id="login-username" name="username">
                                     <label for="login-username">用户名</label>
                                 </div>
                             </div>
@@ -52,14 +52,14 @@
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <div class="form-material form-material-primary floating">
-                                    <input class="form-control" value="{{ password }}" type="password" id="login-password" name="password">
+                                    <input class="form-control" value="{{ result.password }}" type="password" id="login-password" name="password">
                                     <label for="login-password">密码</label>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-8">
-                                <div class="errMsg">{{ errMsg }}</div>
+                                <div class="errMsg">{{ msg }}</div>
                             </div>
                         </div>
                         <div class="form-group push-30-t">
@@ -90,6 +90,8 @@
 <script src="/public/assets/js/core/js.cookie.min.js"></script>
 <script src="/public/assets/js/app.js"></script>
 <script src="/public/assets/js/pages/base_comp_animations.js"></script>
+<script>
 
+</script>
 </body>
 </html>

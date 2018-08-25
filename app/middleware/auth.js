@@ -1,8 +1,10 @@
 module.exports = options => {
     return function* auth(next) {
-        if(!this.session.user && this.request.url != '/adminlogin'){
-            this.redirect('/adminlogin', 'login.adminLogin');
+
+        if(!this.session.user && this.request.url != '/login'){
+            this.redirect('/login', 'login.index');
         }
+
         yield next;
     };
 };

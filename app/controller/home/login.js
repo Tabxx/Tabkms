@@ -1,6 +1,7 @@
 'use strict';
 
 const Controller = require('egg').Controller;
+let jwt = require('jsonwebtoken');
 
 class LoginController extends Controller {
 
@@ -9,7 +10,12 @@ class LoginController extends Controller {
      * @returns {Promise<void>}
      */
     async index() {
-        await this.ctx.render('login/index.tpl', { errMsg: ' '});
+        let result = {
+            code: 1,
+            msg: '',
+            result: ''
+        };
+        await this.ctx.render('login/index.tpl', result);
     }
 
     /**
@@ -26,12 +32,15 @@ class LoginController extends Controller {
         const user = await ctx.service.login.login(username, password);
 
         if (user.user === null) {
-            const res = {
-                errMsg: '用户名或者密码错误！',
-                username,
-                password,
+            const result = {
+                code: 0,
+                msg: '用户名或者密码错误！',
+                result: {
+                    username,
+                    password,
+                }
             };
-            await this.ctx.render('login/index.tpl', res);
+            await this.ctx.render('login/index.tpl', result);
         } else {
             ctx.session.user = user.user;
             await this.ctx.redirect('home/index');

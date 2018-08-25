@@ -45,7 +45,7 @@ module.exports = appInfo => {
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1525703255302_901';
 
-    //config.middleware = ['auth'];
+    config.middleware = ['auth','slider'];
 
   return config;
 };
