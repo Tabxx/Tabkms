@@ -39,7 +39,7 @@
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <div class="form-material form-material-primary floating">
-                                    <input value="{{ username }}" class="form-control" type="text" id="login-username" name="username">
+                                    <input value="{{ res.result.username }}" class="form-control" type="text" id="login-username" name="username">
                                     <label for="login-username">用户名</label>
                                 </div>
                             </div>
@@ -47,7 +47,7 @@
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <div class="form-material form-material-primary floating">
-                                    <input value="{{ password }}" class="form-control" type="password" id="login-password" name="password">
+                                    <input value="" class="form-control" type="password" id="login-password" name="password">
                                     <label for="login-password">密码</label>
                                 </div>
                             </div>
@@ -57,7 +57,7 @@
                                 <label class="css-input switch switch-sm switch-primary">
                                     <input type="checkbox" id="login-remember-me" name="login-remember-me"><span></span> 记住我?
                                 </label>
-                                <div class="errMsg">{{ errMsg }}</div>
+                                <div class="errMsg">{{ res.msg }}</div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -73,10 +73,6 @@
         </div>
     </div>
 </div>
-
-
-
-
 
 
 <script src="/public/assets/js/core/jquery.min.js"></script>

@@ -18,6 +18,7 @@ module.exports = app => {
     // 管理员登录
     router.get('/adminlogin', controller.admin.login.adminIndex);
     router.post('/adminLogin', controller.admin.login.adminLogin);
+    router.get('/adminLogout', controller.admin.login.adminLogout);
 
     // 管理员首页
     app.router.get('/Index', auth, controller.admin.index.index);

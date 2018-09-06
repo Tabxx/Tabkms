@@ -12,6 +12,6 @@
                 <dd><a href="">安全设置</a></dd>
             </dl>
         </li>
-        <li class="layui-nav-item"><a href="">退出登录</a></li>
+        <li class="layui-nav-item"><a href="/adminLogout">退出登录</a></li>
     </ul>
 </div>

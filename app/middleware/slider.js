@@ -1,8 +1,9 @@
-module.exports = options => {
-    return function* slider(ctx, next) {
-        yield next;
-
-        const menus = ctx.service.setup.getAllMenu();
-        ctx.app.locals = { adminMenu: menus };
-    };
+module.exports = (options, app) => {
+  return async function(ctx, next) {
+  	// 主页侧边栏
+    const menus = await ctx.service.setup.getHomeMenu(0);
+    
+   	ctx.locals = { homeMenu: menus };
+	 	await next();
+  };
 };

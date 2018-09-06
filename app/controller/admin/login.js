@@ -9,7 +9,7 @@ class LoginController extends adminBase {
      * @returns {Promise<void>}
      */
     async adminIndex() {
-        await this.ctx.render('login/adminLogin.tpl', { errMsg: ' '});
+        await this.ctx.render('login/adminLogin.tpl');
     }
 
     /**
@@ -17,25 +17,48 @@ class LoginController extends adminBase {
      * @returns {Promise<void>}
      */
     async adminLogin() {
-        const ctx = this.ctx;
+        const {ctx, service} = this;
+        const reqbody = ctx.request.body;
 
-        const username = ctx.helper.escape(ctx.request.body.username);
-        const password = ctx.helper.escape(ctx.request.body.password);
+        // 获取body内的用户名和密码
+        const [username, password] = [
+            ctx.helper.escape(reqbody.username.trim()),
+            ctx.helper.escape(reqbody.password.trim())
+        ];
 
         // 登录成功则返回用户信息
-        const user = await ctx.service.login.login(username.trim(), password);
+        const user = await service.login.login(username, password);
 
         if (user.user === null) {
             const res = {
-                errMsg: '用户名或者密码错误！',
-                username,
-                password,
+                "code": 0,
+                "msg": '用户名或者密码错误！',
+                "result": {
+                    username
+                }
             };
-            await this.ctx.render('login/adminLogin.tpl', res);
+
+            await ctx.render('login/adminLogin.tpl', {res});
         } else {
-            ctx.session.user = ctx.helper.toArr(user.user);
-            await this.ctx.redirect('/Index');
+            const userInfo = ctx.helper.toArr(user.user);
+
+            ctx.session.user = {
+                "username": userInfo.username,
+                "uid": userInfo.id
+            }
+            await ctx.redirect('/Index');
         }
+    }
+
+    /**
+     * 管理员退出
+     */
+    async adminLogout() {
+        const ctx = this;
+
+        //清除session
+        ctx.session = null;
+        await ctx.render('login/adminLogin.tpl');
     }
 }
 

@@ -9,8 +9,13 @@ class LoginService extends Service {
      * @param password
      * @returns {Promise<*>} 用户信息
      */
-    async login(username, password) {
-        const user = await this.app.mysql.get('kms_users', { password: md5(password), username });
+    async login(username = null, password = null) {
+
+        const user = await this.app.mysql.get('kms_users', {
+            username,
+            "password":md5(password)
+        });
+
         return { user };
     }
 }

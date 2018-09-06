@@ -1,10 +1,10 @@
 module.exports = options => {
-    return function* auth(next) {
+    return async function auth(ctx, next) {
 
-        if(!this.session.user && this.request.url != '/login'){
-            this.redirect('/login', 'login.index');
+        if (!ctx.session.user && ctx.request.url !== '/login') {
+            ctx.redirect('/login', 'login.index');
         }
 
-        yield next;
+        await next();
     };
 };
