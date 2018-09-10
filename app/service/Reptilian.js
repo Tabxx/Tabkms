@@ -11,7 +11,7 @@ class ReptilianService extends Service {
      * 爬虫抓取网络信息
      * @returns {Promise<void>}
      */
-    async getData(cnodeUrl, rule, ele1){
+    async getData(cnodeUrl='https://www.csdn.net/', rule, ele1){
         const myapp = this.app;
 
         // 删除数据库中旧数据
@@ -25,7 +25,7 @@ class ReptilianService extends Service {
                 var $ = cheerio.load(res.text);
 
                 // 设置所有的url
-                $('#topic_list .topic_title').each(function (idx, element) {
+                $('#feedlist_id h2 a').each(function (idx, element) {
                     var $element = $(element);
                     var href = url.resolve(cnodeUrl, $element.attr('href'));
                     topicUrls.push(href);
@@ -40,10 +40,10 @@ class ReptilianService extends Service {
                         var $ = cheerio.load(topicHtml,{decodeEntities: false});
 
                         let obj = {
-                            title: $('.topic_full_title').text().trim(),
-                            author: $('.user_name a').text().trim(),
-                            time: $('.changes span').eq(0).text().trim(),
-                            comment: $('.markdown-text').html(),
+                            title: $('.title-article').text().trim(),
+                            author: $('.user-info .text-truncate').text().trim(),
+                            time: $('.article-bar-top .time').eq(0).text().trim(),
+                            comment: $('#article_content').html(),
                         };
 
                         if(obj.title != '' && obj.time != ''){  // 爬到的数据存在就暂时放入数据库

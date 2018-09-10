@@ -20,7 +20,6 @@ class ReptilianController extends adminBase {
             await this.ctx.service.reptilian.getData(postData.url, postData.rule, postData.element);
             await this.ctx.render('Reptilian/animation.tpl');
         }
-
     }
 
     /**

@@ -38,11 +38,11 @@ module.exports = app => {
     router.get('/allMenu', auth, controller.admin.setup.getAllMenu);
 
     // 爬虫
-    router.get('/reptilian',auth, controller.admin.reptilian.Index);
-    router.post('/reptilian', auth,controller.admin.reptilian.Index);
-    router.get('/reptilian/lists',auth, controller.admin.reptilian.repMain);
-    router.get('/reptilian/detail',auth, controller.admin.reptilian.getDetail);
-    router.post('/reptilian/add',auth, controller.admin.reptilian.addKnow);
+    router.get('/reptilian',controller.admin.reptilian.Index);
+    router.post('/reptilian', controller.admin.reptilian.Index);
+    router.get('/reptilian/lists', controller.admin.reptilian.repMain);
+    router.get('/reptilian/detail',controller.admin.reptilian.getDetail);
+    router.post('/reptilian/add',controller.admin.reptilian.addKnow);
 
     // 个人中心
     router.get('/personalzone', controller.home.personal.Index);
