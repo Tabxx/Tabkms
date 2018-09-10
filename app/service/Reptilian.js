@@ -66,12 +66,29 @@ class ReptilianService extends Service {
      * 爬虫信息列表
      * @returns {Promise<any>}
      */
-    async getLists(){
-        let lists = await this.app.mysql.select('kms_webdata', {where: {status: 1}});
-        lists = JSON.stringify(lists);
-        lists = JSON.parse(lists);
+    async getLists(page = 0, limit = 0){
 
+
+        let offset = page == 1 ? 0 : (page - 1) * limit - 1;
+
+        // 数据库查询所有标签
+        let lists = await this.app.mysql.select('kms_webdata', {
+            where: { status: 1}, // WHERE 条件
+            limit: parseInt(limit), // 返回数据量
+            offset: parseInt(offset), // 数据偏移量
+        });
+
+        // 去除row...
+        lists = this.ctx.helper.toArr(lists);
         return lists;
+    }
+
+    /**
+     * 爬虫抓取的数据总数
+     * @returns {Promise<*>}
+     */
+    async getDatasCount() {
+        return await this.app.mysql.count('kms_webdata', {status: 1});
     }
 
     /**

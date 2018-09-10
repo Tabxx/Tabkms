@@ -43,6 +43,7 @@ module.exports = app => {
     router.get('/reptilian/lists', controller.admin.reptilian.repMain);
     router.get('/reptilian/detail',controller.admin.reptilian.getDetail);
     router.post('/reptilian/add',controller.admin.reptilian.addKnow);
+    router.get('/reptilian/page',controller.admin.reptilian.repPage);
 
     // 个人中心
     router.get('/personalzone', controller.home.personal.Index);

@@ -29,8 +29,32 @@ class ReptilianController extends adminBase {
     async repMain() {
         this.init();
 
-        const lists = await this.ctx.service.reptilian.getLists();
-        await this.ctx.render('Reptilian/list.tpl', { lists });
+        await this.ctx.render('Reptilian/list.tpl');
+    }
+
+    /**
+     * 爬虫数据分页
+     * @returns {Promise<void>}
+     */
+    async repPage(){
+        const {app, ctx} = this;
+        const {page = 0,limit = 0} = ctx.query;
+
+        const lists = await ctx.service.reptilian.getLists(page, limit);
+        const count = await ctx.service.reptilian.getDatasCount();
+
+        if (lists !== null) {
+            ctx.body = {
+                "code": 0,
+                "msg": '',
+                "data": lists,
+                count
+            };
+        } else {
+            ctx.body = {
+                'msg': '数据获取异常！'
+            };
+        }
     }
 
     /**

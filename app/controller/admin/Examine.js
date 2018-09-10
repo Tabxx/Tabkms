@@ -25,17 +25,18 @@ class ExamineController extends adminController {
 
         const docs = await ctx.service.knowledge.getAllKonwledges(page, limit);
         const count = await ctx.service.knowledge.getKonwsCount();
+
         if (docs !== null) {
             ctx.body = {
-                code: 0,
-                msg: '',
-                count,
-                data: docs,
-            }
+                "code": 0,
+                "msg": '',
+                "data": docs,
+                count
+            };
         } else {
             ctx.body = {
-                'msg': '数据获取异常！',
-            }
+                'msg': '数据获取异常！'
+            };
         }
     }
 
