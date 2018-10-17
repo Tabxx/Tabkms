@@ -17,7 +17,10 @@ class LoginController extends adminBase {
      * @returns {Promise<void>}
      */
     async adminLogin() {
-        const {ctx, service} = this;
+        const {
+            ctx,
+            service
+        } = this;
         const reqbody = ctx.request.body;
 
         // 获取body内的用户名和密码
@@ -38,7 +41,9 @@ class LoginController extends adminBase {
                 }
             };
 
-            await ctx.render('login/adminLogin.tpl', {res});
+            await ctx.render('login/adminLogin.tpl', {
+                res
+            });
         } else {
             const userInfo = ctx.helper.toArr(user.user);
 
@@ -46,6 +51,7 @@ class LoginController extends adminBase {
                 "username": userInfo.username,
                 "uid": userInfo.id
             }
+            ctx.session.usertype = 0;
             await ctx.redirect('/Index');
         }
     }

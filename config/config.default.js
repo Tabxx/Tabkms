@@ -27,13 +27,13 @@ module.exports = appInfo => {
         // session设置
         session: {
             key: 'user',
-            maxAge: 3600 * 100 * 24,
+            maxAge: 3600 * 100 * 1,
             httpOnly: true,
             encrypt: true,
         },
         // 附件设置
         multipart: {
-            fileExtensions: [ '.doc', '.docx', '.xlsx' ], // 增加对 .apk 扩展名的支持
+            fileExtensions: ['.doc', '.docx', '.xlsx'],
         },
         security: {
             csrf: {
@@ -42,11 +42,10 @@ module.exports = appInfo => {
         },
     };
 
-  	// use for cookie sign key, should change to your own and keep security
-  	config.keys = appInfo.name + '_1525703255302_901';
-	// 中间件
-    config.middleware = ['auth','slider'];
+    // use for cookie sign key, should change to your own and keep security
+    config.keys = appInfo.name + '_1525703255302_901';
+    // 中间件
+    config.middleware = ['auth', 'slider'];
 
-  return config;
+    return config;
 };
-

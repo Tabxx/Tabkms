@@ -11,30 +11,45 @@ class KnowledgeController extends baseController {
      * 上传知识
      * @returns {Promise<void>}
      */
-    async addKnowledge(){
+    async addKnowledge() {
         const ctx = this.ctx;
 
         if (ctx.request.method === 'POST') {
             let knowdata = ctx.request.body;
 
             try {
+
                 ctx.validate({
-                    title: {type: 'string'},
-                    classids: {type: 'string'},
-                    tags: {type: 'string'},
-                    content: {type: 'string'},
-                    enclosure: {type: 'array', required: false},
-                    power: {type: 'string'},
-                    id: {type: 'string'},
+                    title: {
+                        type: 'string'
+                    },
+                    classids: {
+                        type: 'string'
+                    },
+                    tags: {
+                        type: 'string'
+                    },
+                    content: {
+                        type: 'string'
+                    },
+                    enclosure: {
+                        type: 'array',
+                        required: false
+                    },
+                    power: {
+                        type: 'string'
+                    },
+                    id: {
+                        type: 'string'
+                    },
                 });
 
                 const result = await ctx.service.knowledge.addKnowledge(knowdata);
 
-                if(result){
+                if (result) {
                     await ctx.redirect('Personal/index.tpl');
                 }
             } catch (e) {
-                console.log(e);
                 ctx.body = "上传失败！";
             }
         }
@@ -46,7 +61,7 @@ class KnowledgeController extends baseController {
      * 附件上传
      * @returns {Promise<void>}
      */
-    async upload(){
+    async upload() {
         const ctx = this.ctx;
 
         // 1.获取到上传的文件流
@@ -84,7 +99,7 @@ class KnowledgeController extends baseController {
      * 图片上传
      * @returns {Promise<void>}
      */
-    async uploadImg(){
+    async uploadImg() {
         const ctx = this.ctx;
 
         // 1.获取到上传的文件流
@@ -129,7 +144,9 @@ class KnowledgeController extends baseController {
         const content = await ctx.service.knowledge.getDetail(kid);
         await ctx.service.knowledge.addBrowseNum(kid);
 
-        await ctx.render('Knowledge/detail.tpl', { content });
+        await ctx.render('Knowledge/detail.tpl', {
+            content
+        });
 
     }
 

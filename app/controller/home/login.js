@@ -21,7 +21,7 @@ class LoginController extends Controller {
      * 登录操作
      * @returns {Promise<void>}
      */
-    async login(){
+    async login() {
         const ctx = this.ctx;
 
         const username = ctx.helper.escape(ctx.request.body.username);
@@ -42,6 +42,7 @@ class LoginController extends Controller {
             await this.ctx.render('login/index.tpl', result);
         } else {
             ctx.session.user = user.user;
+            ctx.session.usertype = 1;
             await this.ctx.redirect('home/index');
         }
     }
@@ -50,11 +51,9 @@ class LoginController extends Controller {
      * 退出登录
      * @returns {Promise<void>}
      */
-    async logout(){
-        this.ctx.seesion = null;
-        console.log(this.ctx.session);
+    async logout() {
+        this.ctx.session.user = null;
         await this.ctx.redirect('login/index');
-
     }
 
     // /**

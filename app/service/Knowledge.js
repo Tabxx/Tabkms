@@ -7,9 +7,8 @@ class KnowledgeService extends Service {
      * @param knowledge
      * @returns {Promise<boolean>}
      */
-    async addKnowledge(knowledge){
+    async addKnowledge(knowledge) {
         const enclosure = typeof knowledge.enclosure === "undefined" ? ' ' : knowledge.enclosure.toString();
-
         const result = await this.app.mysql.insert('kms_knowledge', {
             title: knowledge.title,
             author: parseInt(knowledge.id),
@@ -32,7 +31,9 @@ class KnowledgeService extends Service {
 
         // 数据库查询所有标签
         let knows = await this.app.mysql.select('kms_knowledge', {
-            where: { status: 0}, // WHERE 条件
+            where: {
+                status: 0
+            }, // WHERE 条件
             limit: parseInt(limit), // 返回数据量
             offset: parseInt(offset), // 数据偏移量
         });
@@ -40,7 +41,7 @@ class KnowledgeService extends Service {
         // 去除row...
         knows = this.ctx.helper.toArr(knows);
         knows = this.ctx.helper.getStatusAttr(knows);
-        if (knows !== null){
+        if (knows !== null) {
             return knows;
         }
         return null;
@@ -51,13 +52,18 @@ class KnowledgeService extends Service {
      * @param uid
      * @returns {Promise<*>}
      */
-    async getUserKonwledges(uid){
+    async getUserKonwledges(uid) {
         // uid为空返回null
-        if(uid === null) return null;
+        if (uid === null) return null;
 
         let knowledges = await this.app.mysql.select('kms_knowledge', {
-            where: {status: [0, 1], author: uid},
-            orders: [['createdate','desc']],
+            where: {
+                status: [0, 1],
+                author: uid
+            },
+            orders: [
+                ['createdate', 'desc']
+            ],
         });
 
         knowledges = this.ctx.helper.toArr(knowledges);
@@ -77,7 +83,9 @@ class KnowledgeService extends Service {
 
         detail = this.ctx.helper.toArr(detail);
         let user = await this.app.mysql.select('kms_users', {
-            where: {id: detail.author},
+            where: {
+                id: detail.author
+            },
             columns: ['username'],
         });
         user = this.ctx.helper.toArr(user);
@@ -89,8 +97,10 @@ class KnowledgeService extends Service {
      * 待审核文档总数
      * @returns {Promise<*>}
      */
-    async getKonwsCount(){
-        const count = await this.app.mysql.count('kms_knowledge', {status:0});
+    async getKonwsCount() {
+        const count = await this.app.mysql.count('kms_knowledge', {
+            status: 0
+        });
         return count;
     }
 
@@ -99,7 +109,7 @@ class KnowledgeService extends Service {
      * @param id
      * @returns {Promise<boolean>}
      */
-    async addBrowseNum(id){
+    async addBrowseNum(id) {
         const sql = 'update kms_knowledge set browse_Number=browse_Number+1 where id = ?'
 
         const result = await this.app.mysql.query(sql, [id]);

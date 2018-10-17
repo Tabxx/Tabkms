@@ -1,10 +1,17 @@
 module.exports = options => {
     return async function auth(ctx, next) {
 
-        if (!ctx.session.user && ctx.request.url !== '/login') {
-            ctx.redirect('/login', 'login.index');
-        }
+        // 拦截器
+        if (!ctx.session.user && ctx.request.url !== '/login' && ctx.request.url != '/adminlogin') {
+            const type = ctx.session.usertype;
+            // 若为管理员返回管理员登录界面
+            if (type) {
+                ctx.redirect('/adminlogin');
+            } else {
+                ctx.redirect('/login', 'login.index');
+            }
 
+        }
         await next();
     };
 };
