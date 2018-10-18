@@ -1,29 +1,18 @@
 {% extends '../Public/admin/base.tpl' %}
 
 {% block css %}
-<link rel="stylesheet" href="/public/assets/js/plugins/bootstrap-datepicker/bootstrap-datepicker3.min.css">
-<link rel="stylesheet" href="/public/assets/js/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
-<link rel="stylesheet" href="/public/assets/js/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
-<link rel="stylesheet" href="/public/assets/js/plugins/select2/select2.min.css">
-<link rel="stylesheet" href="/public/assets/js/plugins/select2/select2-bootstrap.min.css">
-<link rel="stylesheet" href="/public/assets/js/plugins/jquery-auto-complete/jquery.auto-complete.min.css">
-<link rel="stylesheet" href="/public/assets/js/plugins/ion-rangeslider/css/ion.rangeSlider.min.css">
-<link rel="stylesheet" href="/public/assets/js/plugins/ion-rangeslider/css/ion.rangeSlider.skinHTML5.min.css">
-<link rel="stylesheet" href="/public/assets/js/plugins/dropzonejs/dropzone.min.css">
-<link rel="stylesheet" href="/public/assets/js/plugins/jquery-tags-input/jquery.tagsinput.min.css">
 <!-- Bootstrap and OneUI CSS framework -->
 <link rel="stylesheet" href="/public/assets/css/bootstrap.min.css">
 <link rel="stylesheet" id="css-main" href="/public/assets/css/oneui.css">
 <link rel="stylesheet" href="/public/css/style.css">
+
 <style type="text/css">
     .nav-tabs{
         border: none;
     }
-    iframe{
-        border: none;
-        margin: -10px 0 0 -10px;
-    }
 </style>
+<link rel="stylesheet" href="/public/css/eleTree.css">
+<link rel="stylesheet" href="/public/layui/lay/mymodules/layui.css">
 {% endblock %}
 
 {% block main %}
@@ -31,12 +20,8 @@
 <div class="row">
     <div class="col-sm-3 col-md-3 col-lg-3">
         <div class="block">
-            <div class="block-header bg-gray-lighter">
-                <button class="btn btn-success push-5-r push-10" type="button"><i class="fa fa-plus"></i> 新建</button>
-                <button class="btn btn-warning push-5-r push-10" type="button"><i class="fa fa-pencil"></i> 编辑</button>
-            </div>
             <div class="block-content">
-                <iframe src="http://192.168.1.104/abc/demo/tree/666.html" style="height: 440px;width: 90%;"></iframe>
+                <div class="eleTree ele1" lay-filter="data1"></div>
             </div>
         </div>
     </div>
@@ -186,4 +171,116 @@
     </div>
 </div>
 
+{% endblock %}
+
+{% block javascript %}
+ <script>
+        
+        layui.config({
+            base: "public/layui/lay/mymodules/"
+        }).use(['jquery','eleTree'], function(){
+            var $ = layui.jquery;
+            var eleTree = layui.eleTree;
+
+            var data=[
+                {
+                    "label": "a",
+                    "spread": true,
+                    "children": [
+                        {
+                            "label": "aa1",
+                            "spread": true,
+                            "disabled": true,
+                            "children": [
+                                {
+                                    "label": "aaa1",
+                                    "children": [
+                                        {
+                                            "label": "aaaa1",
+                                            "checked": true
+                                        },
+                                        {
+                                            "label": "bbbb1"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "label": "bbb1",
+                                    "spread": true,
+                                    "children": [
+                                        {
+                                            "label": "aaaa1",
+                                            "checked": true
+                                        }
+                                    ]
+                                },
+                                {
+                                    "label": "ccc1"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "bb1",
+                            "children": [
+                                {
+                                    "label": "aaaa1",
+                                    "checked": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "cc1"
+                        }
+                    ]
+                },
+                {
+                    "label": "c",
+                    "children": [
+                        {
+                            "label": "aa1",
+                            "disabled": true
+                        },
+                        {
+                            "label": "bb1",
+                            "checked": true
+                        }
+                    ]
+                }
+            
+            ]
+            eleTree.render({
+                elem: '.ele1',
+                url: "/classify/tree?_csrf={{ ctx.csrf | safe }}",
+                type: "get",
+                // data: data,
+                showCheckbox: true,
+                contextmenuList: ["copy","add","edit","remove"],
+                drag: true,
+                accordion: true
+            });
+
+            eleTree.on("add(data1)",function(data) {
+                console.log(data);
+                // 若后台修改，则重新获取后台数据，然后重载
+                // eleTree.reload(".ele1", {where: {data: JSON.stringify(data.data)}})
+            })
+            eleTree.on("edit(data1)",function(data) {
+                console.log(data);
+            })
+            eleTree.on("remove(data1)",function(data) {
+                console.log(data);
+            })
+            eleTree.on("toggleSlide(data1)",function(data) {
+                console.log(data);
+            })
+            eleTree.on("checkbox(data1)",function(data) {
+                console.log(data);
+            })
+           
+            $(".layui-btn").on("click",function() {
+                console.log(eleTree.checkedData(".ele2"));
+            })
+            
+        });
+    </script>
 {% endblock %}

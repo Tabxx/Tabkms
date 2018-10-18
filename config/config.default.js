@@ -12,7 +12,7 @@ module.exports = appInfo => {
         // 数据库配置
         mysql: {
             client: {
-                host: '127.0.0.1',
+                host: '120.78.173.86',
                 port: '3306',
                 user: 'root',
                 password: 'root',
@@ -27,7 +27,7 @@ module.exports = appInfo => {
         // session设置
         session: {
             key: 'user',
-            maxAge: 3600 * 100 * 1,
+            maxAge: 3600 * 100 * 10,
             httpOnly: true,
             encrypt: true,
         },

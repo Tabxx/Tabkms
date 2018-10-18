@@ -44,6 +44,18 @@ class LoginController extends adminBase {
             await ctx.render('login/adminLogin.tpl', {
                 res
             });
+        } else if (user.user.type != 1) {
+            const res = {
+                "code": 0,
+                "msg": '您不是管理员，无法登陆管理平台！',
+                "result": {
+                    username
+                }
+            };
+
+            await ctx.render('login/adminLogin.tpl', {
+                res
+            });
         } else {
             const userInfo = ctx.helper.toArr(user.user);
 

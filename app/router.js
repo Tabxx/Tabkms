@@ -19,7 +19,7 @@ module.exports = app => {
 
     // 管理员登录
     router.get('/adminlogin', controller.admin.login.adminIndex);
-    router.post('/adminLogin', controller.admin.login.adminLogin);
+    router.post('/adminlogin', controller.admin.login.adminLogin);
     router.get('/adminLogout', controller.admin.login.adminLogout);
 
     // 管理员首页
@@ -27,6 +27,7 @@ module.exports = app => {
 
     // 分类管理
     router.get('/classify', controller.admin.classify.manage);
+    router.get('/classify/tree', controller.admin.classify.tree);
 
     // 系统设置-前台菜单管理
     router.get('/homemenu', controller.admin.setup.menuManage);
