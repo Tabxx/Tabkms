@@ -1,18 +1,14 @@
-{% extends '../Public/admin/base.tpl' %}
-
 {% block css %}
 <link rel="stylesheet" href="/public/assets/js/plugins/select2/select2.min.css">
 <!-- Bootstrap and OneUI CSS framework -->
 <link rel="stylesheet" href="/public/assets/css/bootstrap.min.css">
 <link rel="stylesheet" id="css-main" href="/public/assets/css/oneui.css">
 <style>
-    .block-content img{
+    .block-content img {
         max-width: 100%;
     }
 </style>
-{% endblock %}
-
-{% block main %}
+{% endblock %} {% block main %}
 
 <div class="col-lg-12" style="margin-top: 30px">
     <div class="block block-bordered">
@@ -42,20 +38,16 @@
 <!--分割线-->
 
 <div class="col-lg-3">
-
     <div class="block">
         <div class="block-content block-content-full">
-            <a href="newdocument1.html"><button class="btn btn-info" type="button">修改</button></a>
+            <button class="btn btn-info no-through" type="button">删除</button>
             <button class="btn btn-info" data-toggle="modal" data-target="#modal-popout" type="button">导入知识库</button>
         </div>
     </div>
     <!-- END Crystal on Background Color -->
 </div>
 
-{% endblock %}
-
-
-{% block modal %}
+{% endblock %} {% block modal %}
 <!-- Pop Out Modal -->
 <div class="modal fade" id="modal-popout" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-popout" id="app">
@@ -86,18 +78,33 @@
     </div>
 </div>
 <!-- END Pop Out Modal -->
-{% endblock %}
+{% endblock %} {% block javascript %}
+<script src="/public/assets/js/core/jquery.min.js"></script>
+<script src="/public/assets/js/core/bootstrap.min.js"></script>
+<script src="/public/assets/js/core/jquery.slimscroll.min.js"></script>
+<script src="/public/assets/js/core/jquery.scrollLock.min.js"></script>
+<script src="/public/assets/js/core/jquery.appear.min.js"></script>
+<script src="/public/assets/js/core/jquery.countTo.min.js"></script>
+<script src="/public/assets/js/core/jquery.placeholder.min.js"></script>
+<script src="/public/assets/js/core/js.cookie.min.js"></script>
+<script src="/public/assets/js/app.js"></script>
+<script src="/public/layui/layui.all.js"></script>
 
-{% block javascript %}
 <!-- Page JS Plugins -->
 <script src="/public/assets/js/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
 <script src="/public/assets/js/plugins/select2/select2.full.min.js"></script>
 <script src="/public/js/vue.js"></script>
 <script src="https://cdn.bootcss.com/vue-resource/1.5.0/vue-resource.min.js"></script>
 <script>
-    jQuery(function () {
-    // Init page helpers (BS Datepicker + BS Datetimepicker + BS Colorpicker + BS Maxlength + Select2 + Masked Input + Range Sliders + Tags Inputs plugins)
-    App.initHelpers(['datetimepicker', 'select2']);
+    jQuery(function() {
+        // Init page helpers (BS Datepicker + BS Datetimepicker + BS Colorpicker + BS Maxlength + Select2 + Masked Input + Range Sliders + Tags Inputs plugins)
+        App.initHelpers(['datetimepicker', 'select2']);
+    });
+
+    var layer = null;
+    layui.use(['layer'], function() {
+        layer = layui.layer;
+        var form = layui.form;
     });
 
     let app = new Vue({
@@ -106,27 +113,56 @@
             selected: '111'
         },
         methods: {
-            postData: ()=>{
+            postData: () => {
                 let _this = this;
-                if(_this.classId == ''){
+                if (_this.classId == '') {
                     alert('请选择分类后再提交！');
-                    return ;
+                    return;
                 }
                 let crsftoken = Cookies.get('csrfToken');
                 $.ajax({
                     type: 'post',
                     url: '/reptilian/add',
                     data: {
-                        kid: {{ detail.id }},
+                        kid: `{{ detail.id }}`,
                         classid: $('#example-select2').val(),
                         _csrf: crsftoken,
                     },
-                    success: function(data){
+                    success: function(data) {
                         location.href = data.url;
                     }
                 })
             }
         }
-    })
+    });
+
+
+    $('.no-through').click((event) => {
+        event.preventDefault();
+
+        $.ajax({
+            url: '/reptilian/del',
+            type: 'get',
+            data: {
+                id: `{{detail.id}}`
+            },
+            success(data) {
+                if (data.errorcode === 0 && data.result) {
+                    layer.msg(data.msg, {
+                        icon: 1,
+                        time: 2000
+                    }, function() {
+                        var index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
+                    });
+                } else {
+                    layer.msg(data.msg, {
+                        icon: 2,
+                    })
+                }
+
+            }
+        })
+    });
 </script>
 {% endblock %}

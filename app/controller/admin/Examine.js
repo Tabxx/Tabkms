@@ -16,7 +16,7 @@ class ExamineController extends adminController {
      * 文档分页
      * @returns {Promise<void>}
      */
-    async page(){
+    async page() {
         this.init();
         const ctx = this.ctx;
 
@@ -55,24 +55,60 @@ class ExamineController extends adminController {
         // 分类情况
         const classify = await ctx.service.classify.getAllClass();
 
-        await ctx.render('Examine/detail.tpl', { detail:content, classify });
+        await ctx.render('Examine/detail.tpl', { detail: content, classify });
     }
 
     /**
      * 文档状态更新（审核通过）
      * @returns {Promise<void>}
      */
-    async updateDoc(){
-        await this.init();
-        const ctx = this.ctx;
+    async updateDoc() {
+        const { ctx, service } = this;
 
-        if(ctx.request.method === "POST"){
+        if (ctx.request.method === "POST") {
             const classId = ctx.request.body.classid;
             const kid = ctx.request.body.kid;
 
-            const result = await this.service.examine.updateDoc(kid, classId);
+            const result = await service.examine.updateDoc(kid, classId);
 
-            this.success('/examine','添加成功！', result);
+            if (!result) {
+                ctx.body = {
+                    errorcode: 0,
+                    msg: '导入知识库失败！',
+                    result: null
+                }
+            } else {
+                ctx.body = {
+                    errorcode: 0,
+                    msg: '导入成功！',
+                    result
+                }
+            }
+        }
+    }
+
+    /**
+     * 文档审核未通过
+     */
+    async nothrough() {
+        const { ctx, service } = this;
+
+        const kid = ctx.request.body.kid;
+
+        const result = service.examine.editDocStatus(kid, -1);
+
+        if (!result) {
+            ctx.body = {
+                errorcode: 0,
+                msg: '修改失败！',
+                result: null
+            }
+        } else {
+            ctx.body = {
+                errorcode: 0,
+                msg: '文档审核未通过，已返回给发布者',
+                result
+            }
         }
     }
 

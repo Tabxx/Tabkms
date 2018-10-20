@@ -48,6 +48,7 @@ module.exports = app => {
     router.get('/reptilian/detail', controller.admin.reptilian.getDetail);
     router.post('/reptilian/add', controller.admin.reptilian.addKnow);
     router.get('/reptilian/page', controller.admin.reptilian.repPage);
+    router.get('/reptilian/del', controller.admin.reptilian.delWebData);
 
     // 个人中心
     router.get('/personalzone', controller.home.personal.Index);
@@ -83,6 +84,7 @@ module.exports = app => {
     router.get('/examinePage', controller.admin.examine.page);
     router.get('/examine/detail', controller.admin.examine.detail);
     router.post('/examine/update', controller.admin.examine.updateDoc);
+    router.post('/examine/nothrough', controller.admin.examine.nothrough);
 
     // 分类列表
     router.get('/classLists', controller.home.classify.lists);

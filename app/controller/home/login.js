@@ -45,7 +45,7 @@ class LoginController extends Controller {
             ctx.session.user = {
                 username: user.username,
                 job: user.job,
-                id: user.id
+                uid: user.id
             };
 
             if (user.type === 1) {

@@ -41,8 +41,10 @@
 
     <div class="block">
         <div class="block-content block-content-full">
-            <a href="javascript:;"><button class=" btn btn-info " type="button ">不通过</button></a>
-            <button class="btn btn-info " data-toggle="modal " data-target="#modal-popout " type="button ">导入知识库</button>
+            <a href="javascript:;">
+                <button class="btn btn-info not-through" type="button">不通过</button>
+            </a>
+            <button class="btn btn-info" data-toggle="modal" data-target="#modal-popout" type="button">导入知识库</button>
         </div>
     </div>
     <!-- END Crystal on Background Color -->
@@ -50,30 +52,30 @@
 
 {% endblock %} {% block modal %}
 <!-- Pop Out Modal -->
-<div class="modal fade " id="modal-popout " tabindex="-1 " role="dialog " aria-hidden="true ">
-    <div class="modal-dialog modal-dialog-popout " id="app ">
+<div class="modal fade" id="modal-popout" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-popout" id="app">
         <div class="modal-content ">
-            <div class="block block-themed block-transparent remove-margin-b ">
-                <div class="block-header bg-primary-dark ">
+            <div class="block block-themed block-transparent remove-margin-b">
+                <div class="block-header bg-primary-dark">
                     <ul class="block-options ">
                         <li>
-                            <button data-dismiss="modal " type="button "><i class="si si-close "></i></button>
+                            <button data-dismiss="modal" type="button"><i class="si si-close"></i></button>
                         </li>
                     </ul>
                     <h3 class="block-title ">选择分类</h3>
                 </div>
-                <div class="block-content " style="margin-bottom: 20px; ">
-                    <select class="js-select2 form-control " id="example-select2 " name="example-select2 " style="width: 100%; " data-placeholder="请选择... ">
+                <div class="block-content" style="margin-bottom: 20px;">
+                    <select class="js-select2 form-control" id="example-select2" name="example-select2" style="width: 100%;" data-placeholder="请选择...">
                         <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
                         {% for item in classify %}
-                        <option value="{{ item.id }} "> {{item.name}} </option>
+                        <option value="{{ item.id }}"> {{item.name}} </option>
                         {% endfor %}
                     </select>
                 </div>
             </div>
-            <div class="modal-footer ">
-                <button class="btn btn-sm btn-default " type="button " data-dismiss="modal ">取消</button>
-                <button id="btn " class="btn btn-sm btn-primary " @click="postData() " type="button " data-dismiss="modal "><i class="fa fa-check "></i> 确认</button>
+            <div class="modal-footer">
+                <button class="btn btn-sm btn-default" type="button" data-dismiss="modal">取消</button>
+                <button id="btn" class="btn btn-sm btn-primary" @click="postData()" type="button" data-dismiss="modal"><i class="fa fa-check"></i> 确认</button>
             </div>
         </div>
     </div>
@@ -107,20 +109,36 @@
                     type: 'post',
                     url: '/examine/update',
                     data: {
-                        kid: {
-                            {
-                                detail.id
-                            }
-                        },
+                        kid: `{{detail.id}}`,
                         classid: $('#example-select2').val(),
                         _csrf: crsftoken,
                     },
                     success: function(data) {
-                        location.href = data.url;
+                        location.href = '/examine';
                     }
                 })
             }
         }
+    });
+
+    $('.not-through').click((event) => {
+        event.preventDefault();
+        const crsftoken = Cookies.get('csrfToken');
+        $.ajax({
+            type: 'post',
+            url: '/examine/nothrough',
+            data: {
+                kid: `{{detail.id}}`,
+                _csrf: crsftoken,
+            },
+            success(data) {
+                if (data.errorcode === 0 && data.result) {
+                    location.href = '/examine';
+                } else {
+                    alert(data.msg);
+                }
+            },
+        })
     })
 </script>
 {% endblock %}

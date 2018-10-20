@@ -7,13 +7,14 @@ class PersonalController extends baseController {
      * @returns {Promise<void>}
      */
     async Index() {
-        const ctx = this.ctx;
+        const { ctx, service } = this;
 
         if (ctx.request.method === "GET") {
             const user = ctx.session.user;
 
             // 我的知识
-            const knowledges = await ctx.service.knowledge.getUserKonwledges(user.uid);
+            const knowledges = await service.knowledge.getUserKonwledges(user.uid, [-2, 0, 1]);
+
             await ctx.render('Personal/Index.tpl', {
                 knowledges,
                 user
@@ -26,23 +27,21 @@ class PersonalController extends baseController {
      * @returns {Promise<void>}
      */
     async uploadKnowledge() {
-
-        this.init();
-        const ctx = this.ctx;
+        const { ctx, service } = this;
 
         if (ctx.request.method === "GET") { // get渲染页面
 
             // 知识分类
-            const classIfy = await ctx.service.classify.getAllClass();
+            const classIfy = await service.classify.getAllClass();
 
             // 知识标签
-            const tags = await ctx.service.tags.getTags();
+            const tags = await service.tags.getTags();
 
             // 部门信息
-            const department = await ctx.service.department.index();
+            const department = await service.department.index();
 
             // 用户id
-            const uid = ctx.session.user.id;
+            const uid = ctx.session.user.uid;
 
             await ctx.render('Personal/uploadKnowledge.tpl', {
                 classIfy,

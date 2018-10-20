@@ -52,13 +52,14 @@ class KnowledgeService extends Service {
      * @param uid
      * @returns {Promise<*>}
      */
-    async getUserKonwledges(uid) {
+    async getUserKonwledges(uid, status = [0, 1]) {
+        const { ctx, app } = this;
         // uid为空返回null
         if (uid === null) return null;
 
-        let knowledges = await this.app.mysql.select('kms_knowledge', {
+        let knowledges = await app.mysql.select('kms_knowledge', {
             where: {
-                status: [0, 1],
+                status,
                 author: uid
             },
             orders: [
@@ -66,7 +67,8 @@ class KnowledgeService extends Service {
             ],
         });
 
-        knowledges = this.ctx.helper.toArr(knowledges);
+        knowledges = ctx.helper.toArr(knowledges);
+        knowledges = ctx.helper.getStatusAttr(knowledges);
 
         return knowledges;
     }

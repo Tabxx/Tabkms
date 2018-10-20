@@ -1,38 +1,39 @@
-{% extends '../Public/base.tpl' %}
-
-{% block css %}
+{% extends '../Public/base.tpl' %} {% block css %}
 <style>
-    .myKnowledges .time{
+    .myKnowledges .time {
         font-size: 12px;
         color: #8990A2;
         margin-left: 15px
     }
-    .knowledge-title{
+    
+    .knowledge-title {
         color: black;
         font-size: 18px;
-        font-weight: bolder
+        font-weight: bolder;
     }
+    
     .info,
-    .knowledge-title{
-        margin: 0 0 5px 15px;
+    .knowledge-title {
+        margin: 0 0 20px 15px;
     }
+    
     .info img {
         height: 40px;
         width: 40px;
         margin-bottom: 5px;
     }
-    .info span{
+    
+    .info span {
         margin-left: 15px;
         font-size: 14px;
         font-weight: bolder;
     }
+    
     .handle {
-        margin: 0 0 15px 15px;
+        margin: 15px 0 15px 15px;
     }
 </style>
-{% endblock %}
-
-{% block body %}
+{% endblock %} {% block body %}
 <div class="content bg-image" style="background-image: url('/public/pic/background/3.jpg')">
     <div class="push-50-t push-15 clearfix">
         <div class="push-15-r pull-left animated fadeIn">
@@ -45,11 +46,11 @@
                 <button class="btn btn-minw btn-rounded btn-success" type="button" style="float: right;">
                     <span class="fa fa-upload"></span>&nbsp;&nbsp;&nbsp;上传知识
                 </button>
+
             </a>
         </h2>
     </div>
 </div>
-
 <!--分割线-->
 
 <div class="content bg-white border-b">
@@ -107,14 +108,16 @@
         <div class="tab-pane fade active in" id="btabs-animated-fade-kecheng">
             {% for item in knowledges %}
             <div class="myKnowledges">
-                <div class="time">{{ item.createdate }}</div>
-                <div class="knowledge-title">
-                    <a href="/knowdetail?id={{ item.id }}">{{ item.title }}</a>
-                </div>
+                <div class="time pull-right">{{ item.createdate }}</div>
                 <div class="block info">
                     <img src="/public/pic/icon/main.jpg">
                     <span>{{ user.username }}</span>
                 </div>
+                <div class="knowledge-title">
+                    <a href="/knowdetail?id={{ item.id }}">{{ item.title }}</a>
+                </div>
+
+                <div class="knowledge-status pull-right">{{ item.status }}</div>
                 <div class="handle">
                     <span class="si si-speech" style="margin-right: 40px;cursor: pointer"> 添加评论</span>
                     <span class="fa fa-heart-o" style="margin-right: 40px;cursor: pointer"> 收藏</span>
@@ -129,9 +132,9 @@
                 <ul class="nav-users push col-sm-12 col-md-12 col-lg-12" style="padding: 0;margin-bottom: 25px">
                     <li>
                         <a>
-                            <img class="img-avatar" src="/public/pic/circle/1.jpg">
-                            前端技术交流圈
-                            <div class="font-w400 text-muted"><small class="si si-user" style="color: #646464"> 圈主：</small><small style="margin-right: 5%">张伟</small><small class="si si-users" style="color: #646464"> 成员：</small><small style="margin-right: 5%">102</small><small class="si si-bubbles" style="color: #646464"> 话题：</small><small style="margin-right: 5%">13</small><button class="btn btn-xs btn-warning pull-right" type="button" onclick="join(this)">已加入</button></div>
+                            <img class="img-avatar" src="/public/pic/circle/1.jpg"> 前端技术交流圈
+                            <div class="font-w400 text-muted"><small class="si si-user" style="color: #646464"> 圈主：</small><small style="margin-right: 5%">张伟</small><small class="si si-users" style="color: #646464"> 成员：</small><small style="margin-right: 5%">102</small><small class="si si-bubbles"
+                                    style="color: #646464"> 话题：</small><small style="margin-right: 5%">13</small><button class="btn btn-xs btn-warning pull-right" type="button" onclick="join(this)">已加入</button></div>
                         </a>
                     </li>
                 </ul>
@@ -198,20 +201,31 @@
             <ul class="nav-users push col-sm-12 col-md-12 col-lg-12" style="padding: 0;margin: 0">
                 <li>
                     <a>
-                        <img class="img-avatar" src="pic/circle/7.jpg">
-                        Java交流圈
-                        <div class="font-w400 text-muted"><small class="si si-user" style="color: #646464"> 圈主：</small><small style="margin-right: 5%">胡吉</small><small class="si si-users" style="color: #646464"> 成员：</small><small style="margin-right: 5%">78</small><small class="si si-bubbles" style="color: #646464"> 话题：</small><small style="margin-right: 5%">9</small><button class="btn btn-xs btn-warning pull-right" type="button">已加入</button></div>
+                        <img class="img-avatar" src="pic/circle/7.jpg"> Java交流圈
+                        <div class="font-w400 text-muted"><small class="si si-user" style="color: #646464"> 圈主：</small><small style="margin-right: 5%">胡吉</small><small class="si si-users" style="color: #646464"> 成员：</small><small style="margin-right: 5%">78</small><small class="si si-bubbles"
+                                style="color: #646464"> 话题：</small><small style="margin-right: 5%">9</small><button class="btn btn-xs btn-warning pull-right" type="button">已加入</button></div>
                     </a>
                 </li>
                 <li>
                     <a>
-                        <img class="img-avatar" src="pic/circle/8.jpg">
-                        Android交流圈
-                        <div class="font-w400 text-muted"><small class="si si-user" style="color: #646464"> 圈主：</small><small style="margin-right: 5%">杨昊</small><small class="si si-users" style="color: #646464"> 成员：</small><small style="margin-right: 5%">51</small><small class="si si-bubbles" style="color: #646464"> 话题：</small><small style="margin-right: 5%">7</small><button class="btn btn-xs btn-warning pull-right" type="button">已加入</button></div>
+                        <img class="img-avatar" src="pic/circle/8.jpg"> Android交流圈
+                        <div class="font-w400 text-muted"><small class="si si-user" style="color: #646464"> 圈主：</small><small style="margin-right: 5%">杨昊</small><small class="si si-users" style="color: #646464"> 成员：</small><small style="margin-right: 5%">51</small><small class="si si-bubbles"
+                                style="color: #646464"> 话题：</small><small style="margin-right: 5%">7</small><button class="btn btn-xs btn-warning pull-right" type="button">已加入</button></div>
                     </a>
                 </li>
             </ul>
         </div>
     </div>
 </div>
+{% endblock %} {% block javascript %}
+<script>
+    $('.js-swal-success').on('click', function() {
+        swal({
+            title: "Error!",
+            text: "Here's my error message!",
+            type: "error",
+            confirmButtonText: "Cool"
+        });
+    });
+</script>
 {% endblock %}
