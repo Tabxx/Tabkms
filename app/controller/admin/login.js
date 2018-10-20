@@ -9,6 +9,7 @@ class LoginController extends adminBase {
      * @returns {Promise<void>}
      */
     async adminIndex() {
+        console.log("aaa");
         await this.ctx.render('login/adminLogin.tpl');
     }
 
@@ -17,7 +18,7 @@ class LoginController extends adminBase {
      * @returns {Promise<void>}
      */
     async adminLogin() {
-        const {ctx, service} = this;
+        const { ctx, service } = this;
         const reqbody = ctx.request.body;
 
         // 获取body内的用户名和密码
@@ -38,7 +39,7 @@ class LoginController extends adminBase {
                 }
             };
 
-            await ctx.render('login/adminLogin.tpl', {res});
+            await ctx.render('login/adminLogin.tpl', { res });
         } else {
             const userInfo = ctx.helper.toArr(user.user);
 

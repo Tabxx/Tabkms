@@ -12,7 +12,7 @@ module.exports = appInfo => {
         // 数据库配置
         mysql: {
             client: {
-                host: '127.0.0.1',
+                host: '120.78.173.86',
                 port: '3306',
                 user: 'root',
                 password: 'root',
@@ -33,7 +33,7 @@ module.exports = appInfo => {
         },
         // 附件设置
         multipart: {
-            fileExtensions: [ '.doc', '.docx', '.xlsx' ], // 增加对 .apk 扩展名的支持
+            fileExtensions: ['.doc', '.docx', '.xlsx'], // 增加对 .apk 扩展名的支持
         },
         security: {
             csrf: {
@@ -42,11 +42,10 @@ module.exports = appInfo => {
         },
     };
 
-  	// use for cookie sign key, should change to your own and keep security
-  	config.keys = appInfo.name + '_1525703255302_901';
-	// 中间件
-    config.middleware = ['auth','slider'];
+    // use for cookie sign key, should change to your own and keep security
+    config.keys = appInfo.name + '_1525703255302_901';
+    // 中间件
+    config.middleware = ['auth', 'slider'];
 
-  return config;
+    return config;
 };
-
