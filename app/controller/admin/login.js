@@ -9,7 +9,6 @@ class LoginController extends adminBase {
      * @returns {Promise<void>}
      */
     async adminIndex() {
-        console.log("aaa");
         await this.ctx.render('login/adminLogin.tpl');
     }
 
@@ -18,7 +17,10 @@ class LoginController extends adminBase {
      * @returns {Promise<void>}
      */
     async adminLogin() {
-        const { ctx, service } = this;
+        const {
+            ctx,
+            service
+        } = this;
         const reqbody = ctx.request.body;
 
         // 获取body内的用户名和密码
@@ -39,11 +41,25 @@ class LoginController extends adminBase {
                 }
             };
 
-            await ctx.render('login/adminLogin.tpl', { res });
+            await ctx.render('login/adminLogin.tpl', {
+                res
+            });
+        } else if (user.user.type != 1) {
+            const res = {
+                "code": 0,
+                "msg": '您不是管理员，无法登陆管理平台！',
+                "result": {
+                    username
+                }
+            };
+
+            await ctx.render('login/adminLogin.tpl', {
+                res
+            });
         } else {
             const userInfo = ctx.helper.toArr(user.user);
 
-            ctx.session.user = {
+            ctx.session.admin = {
                 "username": userInfo.username,
                 "uid": userInfo.id
             }
@@ -55,7 +71,7 @@ class LoginController extends adminBase {
      * 管理员退出
      */
     async adminLogout() {
-        const ctx = this;
+        const { ctx } = this;
 
         //清除session
         ctx.session = null;

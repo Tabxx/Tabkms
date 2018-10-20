@@ -27,13 +27,13 @@ module.exports = appInfo => {
         // session设置
         session: {
             key: 'user',
-            maxAge: 3600 * 100 * 24,
+            maxAge: 3600 * 100 * 10,
             httpOnly: true,
             encrypt: true,
         },
         // 附件设置
         multipart: {
-            fileExtensions: ['.doc', '.docx', '.xlsx'], // 增加对 .apk 扩展名的支持
+            fileExtensions: ['.doc', '.docx', '.xlsx'],
         },
         security: {
             csrf: {

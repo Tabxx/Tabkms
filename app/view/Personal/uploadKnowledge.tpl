@@ -221,11 +221,6 @@
             });
         },
     });
-
-    // CKEDITOR.replace('content',{
-    //     filebrowserImageUploadUrl : '/uploadImg?_csrf={{ ctx.csrf | safe }}',
-    //     language : 'zh-cn',
-    // });
 </script>
 
 <script charset="utf-8" src="/public/kindeditor/kindeditor-all-min.js"></script>

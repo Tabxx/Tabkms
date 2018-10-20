@@ -4,12 +4,15 @@
  * @param {Egg.Application} app - egg application
  */
 module.exports = app => {
-    const { router, controller } = app;
+    const {
+        router,
+        controller
+    } = app;
     router.get('/', controller.home.home.index);
-    const auth = app.middleware.auth();
 
     // 管理员错误提醒
     router.get('/adminError', controller.admin.adminBase.errorMsg);
+
     // 用户登录和退出
     router.get('/login', controller.home.login.index);
     router.post('/login', controller.home.login.login);
@@ -17,33 +20,34 @@ module.exports = app => {
 
     // 管理员登录
     router.get('/adminlogin', controller.admin.login.adminIndex);
-    router.post('/adminLogin', controller.admin.login.adminLogin);
+    router.post('/adminlogin', controller.admin.login.adminLogin);
     router.get('/adminLogout', controller.admin.login.adminLogout);
 
     // 管理员首页
-    app.router.get('/Index', auth, controller.admin.index.index);
+    app.router.get('/Index', controller.admin.index.index);
 
     // 分类管理
-    router.get('/classify', auth, controller.admin.classify.manage);
+    router.get('/classify', controller.admin.classify.manage);
+    router.get('/classify/tree', controller.admin.classify.tree);
 
     // 系统设置-前台菜单管理
-    router.get('/homemenu', auth, controller.admin.setup.menuManage);
-    router.get('/homemenu/add', auth, controller.admin.setup.addMenu);
-    router.post('/homemenu/add', auth,  controller.admin.setup.addMenu);
-    router.get('/homemenu/edit', auth, controller.admin.setup.editMenu);
-    router.post('/homemenu/update', auth, controller.admin.setup.editMenu);
+    router.get('/homemenu', controller.admin.setup.menuManage);
+    router.get('/homemenu/add', controller.admin.setup.addMenu);
+    router.post('/homemenu/add', controller.admin.setup.addMenu);
+    router.get('/homemenu/edit', controller.admin.setup.editMenu);
+    router.post('/homemenu/update', controller.admin.setup.editMenu);
 
     // 系统设置-前台菜单管理
-    router.get('/adminMenu', auth, controller.admin.setup.menuManage);
-    router.get('/allMenu', auth, controller.admin.setup.getAllMenu);
+    router.get('/adminMenu', controller.admin.setup.menuManage);
+    router.get('/allMenu', controller.admin.setup.getAllMenu);
 
     // 爬虫
-    router.get('/reptilian',controller.admin.reptilian.Index);
+    router.get('/reptilian', controller.admin.reptilian.Index);
     router.post('/reptilian', controller.admin.reptilian.Index);
     router.get('/reptilian/lists', controller.admin.reptilian.repMain);
-    router.get('/reptilian/detail',controller.admin.reptilian.getDetail);
-    router.post('/reptilian/add',controller.admin.reptilian.addKnow);
-    router.get('/reptilian/page',controller.admin.reptilian.repPage);
+    router.get('/reptilian/detail', controller.admin.reptilian.getDetail);
+    router.post('/reptilian/add', controller.admin.reptilian.addKnow);
+    router.get('/reptilian/page', controller.admin.reptilian.repPage);
 
     // 个人中心
     router.get('/personalzone', controller.home.personal.Index);
@@ -61,28 +65,28 @@ module.exports = app => {
     router.get('/knowdetail', controller.home.knowledge.detail);
 
     // 知识标签
-    router.get('/tags', auth,controller.admin.tags.index);
-    router.get('/tags/add', auth,controller.admin.tags.add);
-    router.post('/tags/add', auth,controller.admin.tags.add);
-    router.get('/pageTags', auth,controller.admin.tags.pageTags);
+    router.get('/tags', controller.admin.tags.index);
+    router.get('/tags/add', controller.admin.tags.add);
+    router.post('/tags/add', controller.admin.tags.add);
+    router.get('/pageTags', controller.admin.tags.pageTags);
 
     // 文件上传
     router.post('/upload', controller.home.knowledge.upload);
 
     // 部门管理
-    router.get('/department', auth,controller.admin.department.index);
-    router.get('/department/add',auth, controller.admin.department.add);
-    router.post('/department/add', auth,controller.admin.department.add);
+    router.get('/department', controller.admin.department.index);
+    router.get('/department/add', controller.admin.department.add);
+    router.post('/department/add', controller.admin.department.add);
 
     // 文档审核
-    router.get('/examine', auth,controller.admin.examine.index);
-    router.get('/examinePage', auth,controller.admin.examine.page);
-    router.get('/examine/detail', auth,controller.admin.examine.detail);
-    router.post('/examine/update', auth,controller.admin.examine.updateDoc);
+    router.get('/examine', controller.admin.examine.index);
+    router.get('/examinePage', controller.admin.examine.page);
+    router.get('/examine/detail', controller.admin.examine.detail);
+    router.post('/examine/update', controller.admin.examine.updateDoc);
 
     // 分类列表
-    router.get('/classLists', auth, controller.home.classify.lists);
-    router.get('/getKnowlist', auth, controller.home.classify.listsJson);
+    router.get('/classLists', controller.home.classify.lists);
+    router.get('/getKnowlist', controller.home.classify.listsJson);
 
     // 关键词搜素
     router.get('/search', controller.home.search.search);

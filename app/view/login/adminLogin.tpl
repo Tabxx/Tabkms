@@ -35,7 +35,7 @@
                     <p>欢迎使用Tab企业知识库管理系统</p>
                     <!-- END Login Title -->
 
-                    <form class="js-validation-login form-horizontal push-30-t push-50" action="/adminLogin" method="post" novalidate="novalidate">
+                    <form class="js-validation-login form-horizontal push-30-t push-50" action="/adminlogin" method="post" novalidate="novalidate">
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <div class="form-material form-material-primary floating">
@@ -79,11 +79,7 @@
 <script src="/public/assets/js/core/bootstrap.min.js"></script>
 <script src="/public/assets/js/core/jquery.slimscroll.min.js"></script>
 <script src="/public/assets/js/core/jquery.scrollLock.min.js"></script>
-<script src="/public/assets/js/core/jquery.appear.min.js"></script>
-<script src="/public/assets/js/core/jquery.countTo.min.js"></script>
 <script src="/public/assets/js/core/jquery.placeholder.min.js"></script>
-<script src="/public/assets/js/core/js.cookie.min.js"></script>
 <script src="/public/assets/js/app.js"></script>
-<script src="/public/assets/js/pages/base_comp_animations.js"></script>
 </body>
 </html>
