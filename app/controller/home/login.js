@@ -31,15 +31,12 @@ class LoginController extends Controller {
         const user = await service.login.login(username, password);
 
         if (user === null) {
-            const result = {
-                code: 0,
-                msg: '用户名或者密码错误！',
-                result: {
-                    username,
-                    password,
+            ctx.body = {
+                    code: 0,
+                    msg: '用户名或者密码错误！',
+                    result: false
                 }
-            };
-            await ctx.render('login/index.tpl', result);
+                // await ctx.render('login/index.tpl', result);
         } else {
 
             ctx.session.user = {
@@ -48,11 +45,25 @@ class LoginController extends Controller {
                 uid: user.id
             };
 
+            let result = null;
+
             if (user.type === 1) {
-                await ctx.redirect('/Index');
+                // await ctx.redirect('/Index');
+                result = {
+                    code: 0,
+                    msg: '管理员登陆成功',
+                    result: '/Index'
+                }
             } else {
-                await ctx.redirect('home/index');
+                // await ctx.redirect('home/index');
+                result = {
+                    code: 0,
+                    msg: '登陆成功',
+                    result: '/'
+                }
             }
+
+            ctx.body = result;
         }
     }
 

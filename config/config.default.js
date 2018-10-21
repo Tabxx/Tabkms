@@ -12,7 +12,7 @@ module.exports = appInfo => {
         // 数据库配置
         mysql: {
             client: {
-                host: '127.0.0.1',
+                host: '120.78.173.86',
                 port: '3306',
                 user: 'root',
                 password: 'root',
