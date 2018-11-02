@@ -9,7 +9,10 @@ class ReptilianController extends adminBase {
      * @returns {Promise<void>}
      */
     async Index() {
-        const { ctx, service } = this;
+        const {
+            ctx,
+            service
+        } = this;
 
         if (ctx.request.method === "GET") {
             await ctx.render('Reptilian/index.tpl');
@@ -27,7 +30,9 @@ class ReptilianController extends adminBase {
      * @returns {Promise<void>}
      */
     async repMain() {
-        const { ctx } = this;
+        const {
+            ctx
+        } = this;
         await ctx.render('Reptilian/list.tpl');
     }
 
@@ -36,8 +41,13 @@ class ReptilianController extends adminBase {
      * @returns {Promise<void>}
      */
     async repPage() {
-        const { ctx, service } = this;
-        const { page = 0, limit = 0 } = ctx.query;
+        const {
+            ctx,
+            service
+        } = this;
+        const {
+            page = 0, limit = 0
+        } = ctx.query;
         this.init();
 
         const lists = await service.reptilian.getLists(page, limit);
@@ -61,7 +71,10 @@ class ReptilianController extends adminBase {
      * 单条爬虫数据的详情
      */
     async getDetail() {
-        const { ctx, service } = this;
+        const {
+            ctx,
+            service
+        } = this;
 
         // get中获取id
         const id = ctx.helper.escape(ctx.query.id);
@@ -71,7 +84,10 @@ class ReptilianController extends adminBase {
 
             // 分类信息
             const classify = await service.classify.getAllClass();
-            await ctx.render('Reptilian/detail.tpl', { detail, classify });
+            await ctx.render('Reptilian/detail.tpl', {
+                detail,
+                classify
+            });
         } else {
             ctx.body = "未知错误！";
         }
@@ -82,7 +98,10 @@ class ReptilianController extends adminBase {
      * @returns {Promise<void>}
      */
     async addKnow() {
-        const { ctx, service } = this;
+        const {
+            ctx,
+            service
+        } = this;
         // 获取参数
         const kid = ctx.helper.escape(ctx.request.body.kid);
         const classId = ctx.helper.escape(ctx.request.body.classid);
@@ -95,7 +114,7 @@ class ReptilianController extends adminBase {
             content: detail.comment,
             enclosure: '',
             power: 0,
-            id: ctx.session.user.id,
+            id: ctx.session.user.uid,
         };
 
 
@@ -109,7 +128,10 @@ class ReptilianController extends adminBase {
      * @memberof ReptilianController
      */
     async delWebData() {
-        const { ctx, service } = this;
+        const {
+            ctx,
+            service
+        } = this;
         const id = ctx.helper.escape(ctx.query.id);
 
         let result = await service.reptilian.delWebData(id);

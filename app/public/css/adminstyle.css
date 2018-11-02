@@ -1,0 +1,11 @@
+.layadmin-header {
+    display: block;
+}
+
+.layui-layout-admin .layui-body {
+    top: 50px;
+}
+
+.layui-table-view .layui-table {
+    width: 100%;
+}

@@ -28,6 +28,7 @@ module.exports = app => {
 
     // 分类管理
     router.get('/classify', controller.admin.classify.manage);
+    router.get('/classify/all', controller.admin.classify.knowlist);
     router.get('/classify/tree', controller.admin.classify.tree);
 
     // 系统设置-前台菜单管理

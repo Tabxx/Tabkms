@@ -147,7 +147,6 @@ class KnowledgeController extends baseController {
         await ctx.render('Knowledge/detail.tpl', {
             content
         });
-
     }
 
 }

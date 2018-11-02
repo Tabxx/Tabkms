@@ -1,32 +1,24 @@
-{% extends '../Public/admin/base.tpl' %} {% block css %}
-<style>
-    .tab-btn {
-        margin: 15px 0 0 0;
-    }
-</style>
-{% endblock %} {% block main %}
-<div class="layui-row">
-    <div class="layui-col-md12">
-        <span class="layui-breadcrumb">
-            <a href="">首页</a>
-            <a href="">知识库管理</a>
-            <a><cite>爬虫抓取</cite></a>
-        </span>
+{% extends '../Public/admin/base.tpl' %}
+{% block main %}
+<div class="layui-card layadmin-header">
+    <div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;">
+        <a lay-href="">主页</a><span lay-separator="">/</span>
+        <a><cite>知识库管理</cite></a><span lay-separator="">/</span>
+        <a><cite>爬虫抓取</cite></a>
     </div>
 </div>
 
-<div class="layui-row">
-    <div class="layui-md-12">
-        <a href="/reptilian" class="layui-btn tab-btn">抓取数据</a>
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-header layuiadmin-card-header-auto">
+            <a href="/reptilian" class="layui-btn tab-btn">抓取数据</a>
+        </div>
+        <div class="layui-card-body">
+            <table id="demo" class="layui-table" lay-filter="test"></table>
+        </div>
     </div>
 </div>
 
-<div class="layui-row">
-    <div class="layui-col-md12">
-        <table id="demo" class="layui-table" lay-filter="test"></table>
-        <div id="page"></div>
-    </div>
-</div>
 {% endblock %} {% block javascript %}
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
@@ -37,7 +29,7 @@
     // 高亮导航栏
     urlItemed('/reptilian/lists');
 
-    layui.use(['laypage', 'table', 'layer'], function() {
+    layui.use(['laypage', 'table', 'layer'], function () {
         var laypage = layui.laypage;
         var table = layui.table;
         var layer = layui.layer;
@@ -81,7 +73,7 @@
             height: 500
         });
 
-        table.on('tool(test)', function(obj) {
+        table.on('tool(test)', function (obj) {
             let data = obj.data; //获得当前行数据
             let layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
 
@@ -94,7 +86,7 @@
                     maxmin: true, //开启最大化最小化按钮
                     area: ['893px', '600px'],
                     content: `/reptilian/detail?id=${data.id}`,
-                    end: function() {
+                    end: function () {
                         // var index = parent.layer.getFrameIndex(window.name);
                         parent.location.reload();
                     }

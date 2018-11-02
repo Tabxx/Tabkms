@@ -27,20 +27,25 @@ class KnowledgeService extends Service {
      */
     async getAllKonwledges(page, limit) {
 
+        const {
+            app,
+            ctx
+        } = this;
+
         let offset = page == 1 ? 0 : (page - 1) * limit - 1;
 
         // 数据库查询所有标签
-        let knows = await this.app.mysql.select('kms_knowledge', {
+        let knows = await app.mysql.select('kms_knowledge', {
             where: {
-                status: 0
+                status: 1
             }, // WHERE 条件
             limit: parseInt(limit), // 返回数据量
             offset: parseInt(offset), // 数据偏移量
         });
 
         // 去除row...
-        knows = this.ctx.helper.toArr(knows);
-        knows = this.ctx.helper.getStatusAttr(knows);
+        knows = ctx.helper.toArr(knows);
+        knows = ctx.helper.getStatusAttr(knows);
         if (knows !== null) {
             return knows;
         }
@@ -53,7 +58,10 @@ class KnowledgeService extends Service {
      * @returns {Promise<*>}
      */
     async getUserKonwledges(uid, status = [0, 1]) {
-        const { ctx, app } = this;
+        const {
+            ctx,
+            app
+        } = this;
         // uid为空返回null
         if (uid === null) return null;
 
@@ -118,6 +126,19 @@ class KnowledgeService extends Service {
         return result.affectedRows === 1;
     }
 
+    /**
+     * 返回知识总数
+     */
+    async getKonwledgeCount() {
+        const {
+            app,
+            ctx
+        } = this;
+
+        return app.mysql.count('kms_knowledge', {
+            status: 1
+        });
+    }
 }
 
 module.exports = KnowledgeService;

@@ -4,7 +4,40 @@ const baseController = require('./AdminBase');
 class ClassifyController extends baseController {
 
     async manage() {
-        await this.ctx.render('Classify/manage.tpl');
+        const {
+            ctx
+        } = this;
+        await ctx.render('Classify/manage.tpl');
+    }
+
+    /**
+     * 内容管理分页数据
+     */
+    async knowlist() {
+        const {
+            service,
+            ctx
+        } = this;
+
+        const {
+            page = 0, limit = 0
+        } = ctx.query;
+
+        let knows = await service.knowledge.getAllKonwledges(page, limit);
+        let count = await service.knowledge.getKonwledgeCount();
+
+        if (knows !== null) {
+            ctx.body = {
+                "code": 0,
+                "msg": '',
+                "data": knows,
+                count
+            };
+        } else {
+            ctx.body = {
+                'msg': '数据获取异常！'
+            };
+        }
     }
 
     /**
