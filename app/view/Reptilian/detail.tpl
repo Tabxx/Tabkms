@@ -1,119 +1,98 @@
-{% block css %}
-<link rel="stylesheet" href="/public/assets/js/plugins/select2/select2.min.css">
-<!-- Bootstrap and OneUI CSS framework -->
-<link rel="stylesheet" href="/public/assets/css/bootstrap.min.css">
-<link rel="stylesheet" id="css-main" href="/public/assets/css/oneui.css">
+{% extends '../Public/admin/base.tpl' %} {% block css %}
 <style>
     .block-content img {
         max-width: 100%;
+        margin: 0 auto;
     }
 </style>
 {% endblock %} {% block main %}
+<div class="layui-card layadmin-header">
+    <div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;">
+        <a lay-href="">主页</a><span lay-separator="">/</span>
+        <a><cite>知识库管理</cite></a><span lay-separator="">/</span>
+        <a><cite>爬虫抓取</cite></a><span lay-separator="">/</span>
+        <a><cite>详情</cite></a>
+    </div>
+</div>
 
-<div class="col-lg-12" style="margin-top: 30px">
-    <div class="block block-bordered">
-        <div class="block-header">
-            <h3 class="block-title" style="text-align: center;color: #4CB2FF;font-size: 20px">{{ detail.title }}</h3>
+<div class="layui-fluid" id="LAY-app-message-detail">
+    <div class="layui-card layuiAdmin-msg-detail">
+        <div class="layui-card-header">
+            <h1>{{ detail.title }}</h1>
+            <p> <span>{{ detail.time }}</span> <span>{{ detail.author }}</span></p>
         </div>
-        <div class="block-content">
-            <p style="text-align: center">作者：<span style="color: #4CB2FF">{{ detail.author }}</span>&nbsp;&nbsp;{{ detail.time }}&nbsp;&nbsp;点评 <span style="color: #56AF3E">(1)&nbsp;&nbsp;</span>推荐 <span style="color: #56AF3E">(3)&nbsp;&nbsp;</span>阅读信息 <span style="color: #56AF3E">(203)</span></p>
+        <div class="layui-card-body layui-text">
+            <div class="layadmin-text block-content">
+                {{ detail.comment | safe }}
+            </div>
+            <div style="padding-top: 30px;">
+                <form class="layui-form" action="">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">选择分类</label>
+                        <div class="layui-input-block">
+                            <select name="city" lay-verify="required" id="example-select2">
+                                <option value=""></option>
+                                {% for item in classify %}
+                                <option value="{{ item.id }}"> {{item.name}} </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-input-block" id="app">
+                            <button class="layui-btn" lay-submit lay-filter="formDemo" @click.prevent="postData">导入知识库</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
 
 <!--分割线-->
 
-<div class="col-lg-9">
-    <div class="block block-bordered">
-        <div class="block-header bg-gray-lighter">
-            <h3 class="block-title">1.主体内容</h3>
-        </div>
-        <div class="block-content">
-            {{ detail.comment | safe }}
-        </div>
-    </div>
-</div>
-<!-- END Block Tabs Animated Slide Up -->
-
-<!--分割线-->
-
-<div class="col-lg-3">
+<!-- <div class="col-lg-3">
     <div class="block">
         <div class="block-content block-content-full">
             <button class="btn btn-info no-through" type="button">删除</button>
             <button class="btn btn-info" data-toggle="modal" data-target="#modal-popout" type="button">导入知识库</button>
         </div>
     </div>
-    <!-- END Crystal on Background Color -->
-</div>
+</div> -->
 
-{% endblock %} {% block modal %}
-<!-- Pop Out Modal -->
-<div class="modal fade" id="modal-popout" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-popout" id="app">
-        <div class="modal-content">
-            <div class="block block-themed block-transparent remove-margin-b">
-                <div class="block-header bg-primary-dark">
-                    <ul class="block-options">
-                        <li>
-                            <button data-dismiss="modal" type="button"><i class="si si-close"></i></button>
-                        </li>
-                    </ul>
-                    <h3 class="block-title">选择分类</h3>
-                </div>
-                <div class="block-content" style="margin-bottom: 20px;">
-                    <select class="js-select2 form-control" id="example-select2" name="example-select2" style="width: 100%;" data-placeholder="请选择...">
-                        <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
-                        {% for item in classify %}
-                        <option value="{{ item.id }}"> {{item.name}} </option>
-                        {% endfor %}
-                    </select>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-sm btn-default" type="button" data-dismiss="modal">{{ selected }}取消</button>
-                <button id="btn" class="btn btn-sm btn-primary" @click="postData()" type="button" data-dismiss="modal"><i class="fa fa-check"></i> 确认</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- END Pop Out Modal -->
 {% endblock %} {% block javascript %}
-<script src="/public/assets/js/core/jquery.min.js"></script>
-<script src="/public/assets/js/core/bootstrap.min.js"></script>
-<script src="/public/assets/js/core/jquery.slimscroll.min.js"></script>
-<script src="/public/assets/js/core/jquery.scrollLock.min.js"></script>
-<script src="/public/assets/js/core/jquery.appear.min.js"></script>
-<script src="/public/assets/js/core/jquery.countTo.min.js"></script>
-<script src="/public/assets/js/core/jquery.placeholder.min.js"></script>
-<script src="/public/assets/js/core/js.cookie.min.js"></script>
-<script src="/public/assets/js/app.js"></script>
-<script src="/public/layui/layui.all.js"></script>
-
-<!-- Page JS Plugins -->
-<script src="/public/assets/js/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-<script src="/public/assets/js/plugins/select2/select2.full.min.js"></script>
 <script src="/public/js/vue.js"></script>
-<script src="https://cdn.bootcss.com/vue-resource/1.5.0/vue-resource.min.js"></script>
 <script>
-    jQuery(function() {
-        // Init page helpers (BS Datepicker + BS Datetimepicker + BS Colorpicker + BS Maxlength + Select2 + Masked Input + Range Sliders + Tags Inputs plugins)
-        App.initHelpers(['datetimepicker', 'select2']);
-    });
-
     var layer = null;
     layui.use(['layer'], function() {
         layer = layui.layer;
         var form = layui.form;
     });
 
+    // 返回上一级
+    $(".closemodal").click(event => {
+        event.preventDefault();
+        var index = parent.layer.getFrameIndex(window.name);
+        parent.layer.close(index);
+    });
+
+    $('.import-data').click(event => {
+        event.preventDefault();
+        let temp = ``;
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-rim', //加上边框
+            area: ['420px', '240px'], //宽高
+            content: $('#barDemo')
+        });
+    })
+
     let app = new Vue({
         el: '#app',
-        data: {
-            selected: '111'
-        },
         methods: {
-            postData: () => {
+            postData: (event) => {
+                event.preventDefault();
                 let _this = this;
                 if (_this.classId == '') {
                     alert('请选择分类后再提交！');
@@ -129,7 +108,13 @@
                         _csrf: crsftoken,
                     },
                     success: function(data) {
-                        location.href = data.url;
+                        layer.msg(data.msg, {
+                            icon: 1,
+                            time: 1500
+                        }, function() {
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index);
+                        });
                     }
                 })
             }
@@ -154,6 +139,7 @@
                     }, function() {
                         var index = parent.layer.getFrameIndex(window.name);
                         parent.layer.close(index);
+                        parent.location.reload();
                     });
                 } else {
                     layer.msg(data.msg, {

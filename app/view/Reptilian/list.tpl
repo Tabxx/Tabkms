@@ -1,5 +1,4 @@
-{% extends '../Public/admin/base.tpl' %}
-{% block main %}
+{% extends '../Public/admin/base.tpl' %} {% block main %}
 <div class="layui-card layadmin-header">
     <div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;">
         <a lay-href="">主页</a><span lay-separator="">/</span>
@@ -29,7 +28,7 @@
     // 高亮导航栏
     urlItemed('/reptilian/lists');
 
-    layui.use(['laypage', 'table', 'layer'], function () {
+    layui.use(['laypage', 'table', 'layer'], function() {
         var laypage = layui.laypage;
         var table = layui.table;
         var layer = layui.layer;
@@ -73,7 +72,7 @@
             height: 500
         });
 
-        table.on('tool(test)', function (obj) {
+        table.on('tool(test)', function(obj) {
             let data = obj.data; //获得当前行数据
             let layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
 
@@ -86,9 +85,9 @@
                     maxmin: true, //开启最大化最小化按钮
                     area: ['893px', '600px'],
                     content: `/reptilian/detail?id=${data.id}`,
-                    end: function () {
+                    end: function() {
                         // var index = parent.layer.getFrameIndex(window.name);
-                        parent.location.reload();
+                        // parent.location.reload();
                     }
                 });
             } else if (layEvent === 'del') { //删除
@@ -97,6 +96,23 @@
 
             }
         });
+
+        $('.tab-btn').click(event => {
+            event.preventDefault();
+
+            layer.open({
+                type: 2,
+                title: `抓取数据`,
+                shadeClose: true,
+                shade: false,
+                maxmin: true, //开启最大化最小化按钮
+                area: ['893px', '600px'],
+                content: `/reptilian/`,
+                end: function() {
+                    parent.location.reload();
+                }
+            });
+        })
 
     });
 </script>
