@@ -1,173 +1,536 @@
-{% extends '../Public/admin/base.tpl' %}
-
-    {% block main %}
-        <!-- 内容主体区域 -->
-        <fieldset class="layui-elem-field">
-            <legend>信息统计</legend>
-            <div class="layui-field-box">
-                <table class="layui-table" lay-even="">
-                    <thead>
-                    <tr>
-                        <th>统计</th>
-                        <th>资讯库</th>
-                        <th>图片库</th>
-                        <th>产品库</th>
-                        <th>用户</th>
-                        <th>管理员</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>总数</td>
-                        <td>92</td>
-                        <td>9</td>
-                        <td>0</td>
-                        <td>8</td>
-                        <td>20</td>
-                    </tr>
-                    <tr>
-                        <td>今日</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                    </tr>
-                    <tr>
-                        <td>昨日</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                    </tr>
-                    <tr>
-                        <td>本周</td>
-                        <td>2</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                    </tr>
-                    <tr>
-                        <td>本月</td>
-                        <td>2</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                    </tr>
-                    </tbody>
-                </table>
-                <table class="layui-table">
-                    <thead>
-                    <tr>
-                        <th colspan="2" scope="col">服务器信息</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <th width="30%">服务器计算机名</th>
-                        <td><span id="lbServerName">http://127.0.0.1/</span></td>
-                    </tr>
-                    <tr>
-                        <td>服务器IP地址</td>
-                        <td>192.168.1.1</td>
-                    </tr>
-                    <tr>
-                        <td>服务器域名</td>
-                        <td>x.xuebingsi.com</td>
-                    </tr>
-                    <tr>
-                        <td>服务器端口 </td>
-                        <td>80</td>
-                    </tr>
-                    <tr>
-                        <td>服务器IIS版本 </td>
-                        <td>Microsoft-IIS/6.0</td>
-                    </tr>
-                    <tr>
-                        <td>本文件所在文件夹 </td>
-                        <td>D:\WebSite\HanXiPuTai.com\XinYiCMS.Web\</td>
-                    </tr>
-                    <tr>
-                        <td>服务器操作系统 </td>
-                        <td>Microsoft Windows NT 5.2.3790 Service Pack 2</td>
-                    </tr>
-                    <tr>
-                        <td>系统所在文件夹 </td>
-                        <td>C:\WINDOWS\system32</td>
-                    </tr>
-                    <tr>
-                        <td>服务器脚本超时时间 </td>
-                        <td>30000秒</td>
-                    </tr>
-                    <tr>
-                        <td>服务器的语言种类 </td>
-                        <td>Chinese (People's Republic of China)</td>
-                    </tr>
-                    <tr>
-                        <td>.NET Framework 版本 </td>
-                        <td>2.050727.3655</td>
-                    </tr>
-                    <tr>
-                        <td>服务器当前时间 </td>
-                        <td>2017-01-01 12:06:23</td>
-                    </tr>
-                    <tr>
-                        <td>服务器IE版本 </td>
-                        <td>6.0000</td>
-                    </tr>
-                    <tr>
-                        <td>服务器上次启动到现在已运行 </td>
-                        <td>7210分钟</td>
-                    </tr>
-                    <tr>
-                        <td>逻辑驱动器 </td>
-                        <td>C:\D:\</td>
-                    </tr>
-                    <tr>
-                        <td>CPU 总数 </td>
-                        <td>4</td>
-                    </tr>
-                    <tr>
-                        <td>CPU 类型 </td>
-                        <td>x86 Family 6 Model 42 Stepping 1, GenuineIntel</td>
-                    </tr>
-                    <tr>
-                        <td>虚拟内存 </td>
-                        <td>52480M</td>
-                    </tr>
-                    <tr>
-                        <td>当前程序占用内存 </td>
-                        <td>3.29M</td>
-                    </tr>
-                    <tr>
-                        <td>Asp.net所占内存 </td>
-                        <td>51.46M</td>
-                    </tr>
-                    <tr>
-                        <td>当前Session数量 </td>
-                        <td>8</td>
-                    </tr>
-                    <tr>
-                        <td>当前SessionID </td>
-                        <td>gznhpwmp34004345jz2q3l45</td>
-                    </tr>
-                    <tr>
-                        <td>当前系统用户名 </td>
-                        <td>NETWORK SERVICE</td>
-                    </tr>
-                    </tbody>
-                </table>
+{% extends '../Public/admin/base.tpl' %} {% block main %}
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm6 layui-col-md3">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    访问量
+                    <span class="layui-badge layui-bg-blue layuiadmin-badge">周</span>
+                </div>
+                <div class="layui-card-body layuiadmin-card-list">
+                    <p class="layuiadmin-big-font">636</p>
+                    <p>
+                        总计访问量
+                        <span class="layuiadmin-span-color">500 <i class="layui-icon"></i></span>
+                    </p>
+                </div>
             </div>
-        </fieldset>
-        <!-- 内容主体区域 -->
-    {% endblock %}
+        </div>
+        <div class="layui-col-sm6 layui-col-md3">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    下载
+                    <span class="layui-badge layui-bg-cyan layuiadmin-badge">月</span>
+                </div>
+                <div class="layui-card-body layuiadmin-card-list">
+                    <p class="layuiadmin-big-font">33</p>
+                    <p>
+                        新下载
+                        <span class="layuiadmin-span-color">10% <i class="layui-icon"></i></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-sm6 layui-col-md3">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    收入
+                    <span class="layui-badge layui-bg-green layuiadmin-badge">年</span>
+                </div>
+                <div class="layui-card-body layuiadmin-card-list">
 
-{% block javascript %}
+                    <p class="layuiadmin-big-font">0</p>
+                    <p>
+                        总收入
+                        <span class="layuiadmin-span-color">*** <i class="layui-icon"></i></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-sm6 layui-col-md3">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    活跃用户
+                    <span class="layui-badge layui-bg-orange layuiadmin-badge">月</span>
+                </div>
+                <div class="layui-card-body layuiadmin-card-list">
+
+                    <p class="layuiadmin-big-font">2</p>
+                    <p>
+                        最近一个月
+                        <span class="layuiadmin-span-color">100% <i class="layui-icon"></i></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-sm12">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    访问量
+                    <div class="layui-btn-group layuiadmin-btn-group">
+                        <button class="layui-btn layui-btn-primary layui-btn-xs">去年</button>
+                        <button class="layui-btn layui-btn-primary layui-btn-xs">今年</button>
+                    </div>
+                </div>
+                <div class="layui-card-body">
+                    <div class="layui-row">
+                        <div class="layui-col-sm8">
+                            <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade" lay-filter="LAY-index-pagetwo" lay-anim="fade" style="width: 100%; height: 280px;">
+                                <div carousel-item="" id="LAY-index-pagetwo">
+                                    <div class="layui-this" _echarts_instance_="1541233807960" style="-webkit-tap-highlight-color: transparent; user-select: none; background-color: rgba(0, 0, 0, 0); cursor: default;">
+                                        <div style="position: relative; overflow: hidden; width: 1082px; height: 332px;">
+                                            <div data-zr-dom-id="bg" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 1082px; height: 332px; user-select: none;"></div><canvas width="1082" height="332" data-zr-dom-id="0" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 1082px; height: 332px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas>
+                                            <canvas width="1082" height="332" data-zr-dom-id="1" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 1082px; height: 332px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas>
+                                            <canvas width="1082" height="332" data-zr-dom-id="_zrender_hover_" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 1082px; height: 332px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas>
+                                            <div class="echarts-tooltip zr-element" style="position: absolute; display: none; border-style: solid; white-space: nowrap; transition: left 0.4s ease 0s, top 0.4s ease 0s; background-color: rgba(50, 50, 50, 0.5); border-width: 0px; border-color: rgb(51, 51, 51); border-radius: 4px; color: rgb(255, 255, 255); font-family: 微软雅黑, Arial, Verdana, sans-serif; padding: 5px; left: 359px; top: 72px;">4月<br>访问量 : 1,000<br>下载量 : 950<br>平均访问量 : 950</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-sm4">
+                            <div class="layuiadmin-card-list">
+                                <p class="layuiadmin-normal-font">月访问数</p>
+                                <span>同上期增长</span>
+                                <div class="layui-progress layui-progress-big" lay-showpercent="yes">
+                                    <div class="layui-progress-bar" lay-percent="30%" style="width: 30%;"><span class="layui-progress-text">30%</span></div>
+                                </div>
+                            </div>
+                            <div class="layuiadmin-card-list">
+                                <p class="layuiadmin-normal-font">月下载数</p>
+                                <span>同上期增长</span>
+                                <div class="layui-progress layui-progress-big" lay-showpercent="yes">
+                                    <div class="layui-progress-bar" lay-percent="20%" style="width: 20%;"><span class="layui-progress-text">20%</span></div>
+                                </div>
+                            </div>
+                            <div class="layuiadmin-card-list">
+                                <p class="layuiadmin-normal-font">月收入</p>
+                                <span>同上期增长</span>
+                                <div class="layui-progress layui-progress-big" lay-showpercent="yes">
+                                    <div class="layui-progress-bar" lay-percent="25%" style="width: 25%;"><span class="layui-progress-text">25%</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-sm4">
+            <div class="layui-card">
+                <div class="layui-card-header">用户留言</div>
+                <div class="layui-card-body">
+                    <ul class="layuiadmin-card-status layuiadmin-home2-usernote">
+                        <li>
+                            <h3>贤心</h3>
+                            <p>作为 layui 官方推出的后台模板，从初版的饱受争议，到后续的埋头丰富，逐步占据了国内后台系统应用的主要市场。</p>
+                            <span>5月30日 00:00</span>
+                            <a href="javascript:;" layadmin-event="replyNote" data-id="7" class="layui-btn layui-btn-xs layuiadmin-reply">回复</a>
+                        </li>
+                        <li>
+                            <h3>诸葛亮</h3>
+                            <p>皓首匹夫！苍髯老贼！你枉活九十有六，一生未立寸功，只会摇唇鼓舌！助曹为虐！一条断脊之犬，还敢在我军阵前狺狺狂吠，我从未见过有如此厚颜无耻之人！</p>
+                            <span>5月02日 00:00</span>
+                            <a href="javascript:;" layadmin-event="replyNote" data-id="5" class="layui-btn layui-btn-xs layuiadmin-reply">回复</a>
+                        </li>
+                        <li>
+                            <h3>胡歌</h3>
+                            <p>你以为只要长得漂亮就有男生喜欢？你以为只要有了钱漂亮妹子就自己贴上来了？你以为学霸就能找到好工作？我告诉你吧，这些都是真的！</p>
+                            <span>5月11日 00:00</span>
+                            <a href="javascript:;" layadmin-event="replyNote" data-id="6" class="layui-btn layui-btn-xs layuiadmin-reply">回复</a>
+                        </li>
+                        <li>
+                            <h3>杜甫</h3>
+                            <p>人才虽高，不务学问，不能致圣。刘向十日画一水，五日画一石。</p>
+                            <span>4月11日 00:00</span>
+                            <a href="javascript:;" layadmin-event="replyNote" data-id="2" class="layui-btn layui-btn-xs layuiadmin-reply">回复</a>
+                        </li>
+                        <li>
+                            <h3>鲁迅</h3>
+                            <p>路本是无所谓有和无的，走的人多了，就没路了。。</p>
+                            <span>4月28日 00:00</span>
+                            <a href="javascript:;" layadmin-event="replyNote" data-id="4" class="layui-btn layui-btn-xs layuiadmin-reply">回复</a>
+                        </li>
+                        <li>
+                            <h3>张爱玲</h3>
+                            <p>于千万人之中遇到你所要遇到的人，于千万年之中，时间的无涯的荒野中，没有早一步，也没有晚一步，刚巧赶上了，那也没有别的话好说，唯有轻轻的问一声：“噢，原来你也在这里？”</p>
+                            <span>4月11日 00:00</span>
+                            <a href="javascript:;" layadmin-event="replyNote" data-id="1" class="layui-btn layui-btn-xs layuiadmin-reply">回复</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-sm8">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-sm6">
+                    <div class="layui-card">
+                        <div class="layui-card-header">本周活跃用户列表</div>
+                        <div class="layui-card-body">
+                            <table class="layui-table layuiadmin-page-table" lay-skin="line">
+                                <thead>
+                                    <tr>
+                                        <th>用户名</th>
+                                        <th>最后登录时间</th>
+                                        <th>状态</th>
+                                        <th>获得赞</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><span class="first">胡歌</span></td>
+                                        <td><i class="layui-icon layui-icon-log"> 11:20</i></td>
+                                        <td><span>在线</span></td>
+                                        <td>22 <i class="layui-icon layui-icon-praise"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="second">彭于晏</span></td>
+                                        <td><i class="layui-icon layui-icon-log"> 10:40</i></td>
+                                        <td><span>在线</span></td>
+                                        <td>21 <i class="layui-icon layui-icon-praise"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="third">靳东</span></td>
+                                        <td><i class="layui-icon layui-icon-log"> 01:30</i></td>
+                                        <td><i>离线</i></td>
+                                        <td>66 <i class="layui-icon layui-icon-praise"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>吴尊</td>
+                                        <td><i class="layui-icon layui-icon-log"> 21:18</i></td>
+                                        <td><i>离线</i></td>
+                                        <td>45 <i class="layui-icon layui-icon-praise"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>许上进</td>
+                                        <td><i class="layui-icon layui-icon-log"> 09:30</i></td>
+                                        <td><span>在线</span></td>
+                                        <td>21 <i class="layui-icon layui-icon-praise"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>小蚊子</td>
+                                        <td><i class="layui-icon layui-icon-log"> 21:18</i></td>
+                                        <td><i>在线</i></td>
+                                        <td>45 <i class="layui-icon layui-icon-praise"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>贤心</td>
+                                        <td><i class="layui-icon layui-icon-log"> 09:30</i></td>
+                                        <td><span>在线</span></td>
+                                        <td>21 <i class="layui-icon layui-icon-praise"></i></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm6">
+                    <div class="layui-card">
+                        <div class="layui-card-header">项目进展</div>
+                        <div class="layui-card-body">
+                            <div class="layui-tab-content">
+                                <div class="layui-tab-item layui-show">
+                                    <table id="LAY-home-homepage2"></table>
+                                    <div class="layui-form layui-border-box layui-table-view" lay-filter="LAY-table-4" lay-id="LAY-home-homepage2" style=" ">
+                                        <div class="layui-table-box">
+                                            <div class="layui-table-header">
+                                                <table cellspacing="0" cellpadding="0" border="0" class="layui-table" lay-skin="line">
+                                                    <thead>
+                                                        <tr>
+                                                            <th data-field="0" data-key="4-0-0" data-unresize="true" class=" layui-table-col-special">
+                                                                <div class="layui-table-cell laytable-cell-4-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary" lay-filter="layTableAllChoose">
+                                                                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div>
+                                                                </div>
+                                                            </th>
+                                                            <th data-field="prograss" data-key="4-0-1" class="">
+                                                                <div class="layui-table-cell laytable-cell-4-0-1"><span>任务</span></div>
+                                                            </th>
+                                                            <th data-field="time" data-key="4-0-2" class="">
+                                                                <div class="layui-table-cell laytable-cell-4-0-2"><span>所需时间</span></div>
+                                                            </th>
+                                                            <th data-field="complete" data-key="4-0-3" class="">
+                                                                <div class="layui-table-cell laytable-cell-4-0-3"><span>完成情况</span></div>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                            <div class="layui-table-body layui-table-main">
+                                                <table cellspacing="0" cellpadding="0" border="0" class="layui-table" lay-skin="line">
+                                                    <tbody>
+                                                        <tr data-index="0">
+                                                            <td data-field="0" data-key="4-0-0" class="layui-table-col-special">
+                                                                <div class="layui-table-cell laytable-cell-4-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary" checked="">
+                                                                    <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div>
+                                                                </div>
+                                                            </td>
+                                                            <td data-field="prograss" data-key="4-0-1" class="">
+                                                                <div class="layui-table-cell laytable-cell-4-0-1">开会</div>
+                                                            </td>
+                                                            <td data-field="time" data-key="4-0-2" class="">
+                                                                <div class="layui-table-cell laytable-cell-4-0-2">一小时</div>
+                                                            </td>
+                                                            <td data-field="complete" data-key="4-0-3" data-content="已完成" class="">
+                                                                <div class="layui-table-cell laytable-cell-4-0-3"><del style="color: #5FB878;">已完成</del></div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr data-index="1">
+                                                            <td data-field="0" data-key="4-0-0" class="layui-table-col-special">
+                                                                <div class="layui-table-cell laytable-cell-4-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary" checked="">
+                                                                    <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div>
+                                                                </div>
+                                                            </td>
+                                                            <td data-field="prograss" data-key="4-0-1" class="">
+                                                                <div class="layui-table-cell laytable-cell-4-0-1">项目开发</div>
+                                                            </td>
+                                                            <td data-field="time" data-key="4-0-2" class="">
+                                                                <div class="layui-table-cell laytable-cell-4-0-2">两小时</div>
+                                                            </td>
+                                                            <td data-field="complete" data-key="4-0-3" data-content="进行中" class="">
+                                                                <div class="layui-table-cell laytable-cell-4-0-3"><span style="color: #FFB800;">进行中</span></div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr data-index="2">
+                                                            <td data-field="0" data-key="4-0-0" class="layui-table-col-special">
+                                                                <div class="layui-table-cell laytable-cell-4-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary">
+                                                                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div>
+                                                                </div>
+                                                            </td>
+                                                            <td data-field="prograss" data-key="4-0-1" class="">
+                                                                <div class="layui-table-cell laytable-cell-4-0-1">陪吃饭</div>
+                                                            </td>
+                                                            <td data-field="time" data-key="4-0-2" class="">
+                                                                <div class="layui-table-cell laytable-cell-4-0-2">一小时</div>
+                                                            </td>
+                                                            <td data-field="complete" data-key="4-0-3" data-content="未完成" class="">
+                                                                <div class="layui-table-cell laytable-cell-4-0-3"><span style="color: #FF5722;">未完成</span></div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr data-index="3">
+                                                            <td data-field="0" data-key="4-0-0" class="layui-table-col-special">
+                                                                <div class="layui-table-cell laytable-cell-4-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary">
+                                                                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div>
+                                                                </div>
+                                                            </td>
+                                                            <td data-field="prograss" data-key="4-0-1" class="">
+                                                                <div class="layui-table-cell laytable-cell-4-0-1">修改小bug</div>
+                                                            </td>
+                                                            <td data-field="time" data-key="4-0-2" class="">
+                                                                <div class="layui-table-cell laytable-cell-4-0-2">半小时</div>
+                                                            </td>
+                                                            <td data-field="complete" data-key="4-0-3" data-content="未完成" class="">
+                                                                <div class="layui-table-cell laytable-cell-4-0-3"><span style="color: #FF5722;">未完成</span></div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr data-index="4">
+                                                            <td data-field="0" data-key="4-0-0" class="layui-table-col-special">
+                                                                <div class="layui-table-cell laytable-cell-4-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary">
+                                                                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div>
+                                                                </div>
+                                                            </td>
+                                                            <td data-field="prograss" data-key="4-0-1" class="">
+                                                                <div class="layui-table-cell laytable-cell-4-0-1">修改大bug</div>
+                                                            </td>
+                                                            <td data-field="time" data-key="4-0-2" class="">
+                                                                <div class="layui-table-cell laytable-cell-4-0-2">两小时</div>
+                                                            </td>
+                                                            <td data-field="complete" data-key="4-0-3" data-content="未完成" class="">
+                                                                <div class="layui-table-cell laytable-cell-4-0-3"><span style="color: #FF5722;">未完成</span></div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr data-index="5">
+                                                            <td data-field="0" data-key="4-0-0" class="layui-table-col-special">
+                                                                <div class="layui-table-cell laytable-cell-4-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary">
+                                                                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div>
+                                                                </div>
+                                                            </td>
+                                                            <td data-field="prograss" data-key="4-0-1" class="">
+                                                                <div class="layui-table-cell laytable-cell-4-0-1">修改小bug</div>
+                                                            </td>
+                                                            <td data-field="time" data-key="4-0-2" class="">
+                                                                <div class="layui-table-cell laytable-cell-4-0-2">半小时</div>
+                                                            </td>
+                                                            <td data-field="complete" data-key="4-0-3" data-content="未完成" class="">
+                                                                <div class="layui-table-cell laytable-cell-4-0-3"><span style="color: #FF5722;">未完成</span></div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr data-index="6">
+                                                            <td data-field="0" data-key="4-0-0" class="layui-table-col-special">
+                                                                <div class="layui-table-cell laytable-cell-4-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary">
+                                                                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div>
+                                                                </div>
+                                                            </td>
+                                                            <td data-field="prograss" data-key="4-0-1" class="">
+                                                                <div class="layui-table-cell laytable-cell-4-0-1">修改大bug</div>
+                                                            </td>
+                                                            <td data-field="time" data-key="4-0-2" class="">
+                                                                <div class="layui-table-cell laytable-cell-4-0-2">两小时</div>
+                                                            </td>
+                                                            <td data-field="complete" data-key="4-0-3" data-content="未完成" class="">
+                                                                <div class="layui-table-cell laytable-cell-4-0-3"><span style="color: #FF5722;">未完成</span></div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="layui-table-fixed layui-table-fixed-l">
+                                                <div class="layui-table-header">
+                                                    <table cellspacing="0" cellpadding="0" border="0" class="layui-table" lay-skin="line">
+                                                        <thead>
+                                                            <tr>
+                                                                <th data-field="0" data-key="4-0-0" data-unresize="true" class=" layui-table-col-special">
+                                                                    <div class="layui-table-cell laytable-cell-4-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary" lay-filter="layTableAllChoose">
+                                                                        <div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div>
+                                                                    </div>
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                </div>
+                                                <div class="layui-table-body" style="height: 273px;">
+                                                    <table cellspacing="0" cellpadding="0" border="0" class="layui-table" lay-skin="line">
+                                                        <tbody>
+                                                            <tr data-index="0">
+                                                                <td data-field="0" data-key="4-0-0" class="layui-table-col-special">
+                                                                    <div class="layui-table-cell laytable-cell-4-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary" checked="">
+                                                                        <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr data-index="1">
+                                                                <td data-field="0" data-key="4-0-0" class="layui-table-col-special">
+                                                                    <div class="layui-table-cell laytable-cell-4-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary" checked="">
+                                                                        <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr data-index="2">
+                                                                <td data-field="0" data-key="4-0-0" class="layui-table-col-special">
+                                                                    <div class="layui-table-cell laytable-cell-4-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary">
+                                                                        <div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr data-index="3">
+                                                                <td data-field="0" data-key="4-0-0" class="layui-table-col-special">
+                                                                    <div class="layui-table-cell laytable-cell-4-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary">
+                                                                        <div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr data-index="4">
+                                                                <td data-field="0" data-key="4-0-0" class="layui-table-col-special">
+                                                                    <div class="layui-table-cell laytable-cell-4-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary">
+                                                                        <div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr data-index="5">
+                                                                <td data-field="0" data-key="4-0-0" class="layui-table-col-special">
+                                                                    <div class="layui-table-cell laytable-cell-4-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary">
+                                                                        <div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr data-index="6">
+                                                                <td data-field="0" data-key="4-0-0" class="layui-table-col-special">
+                                                                    <div class="layui-table-cell laytable-cell-4-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary">
+                                                                        <div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <style>
+                                            .laytable-cell-4-0-0 {
+                                                width: 48px;
+                                            }
+                                            
+                                            .laytable-cell-4-0-1 {}
+                                            
+                                            .laytable-cell-4-0-2 {}
+                                            
+                                            .laytable-cell-4-0-3 {}
+                                        </style>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">用户全国分布</div>
+                        <div class="layui-card-body">
+                            <div class="layui-row layui-col-space15">
+                                <div class="layui-col-sm4">
+                                    <table class="layui-table layuiadmin-page-table" lay-skin="line">
+                                        <thead>
+                                            <tr>
+                                                <th>排名</th>
+                                                <th>地区</th>
+                                                <th>人数</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>浙江</td>
+                                                <td>62310</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>上海</td>
+                                                <td>59190</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>广东</td>
+                                                <td>55891</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>北京</td>
+                                                <td>51919</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>山东</td>
+                                                <td>39231</td>
+                                            </tr>
+                                            <tr>
+                                                <td>6</td>
+                                                <td>湖北</td>
+                                                <td>37109</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="layui-col-sm8">
+                                    <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade" lay-filter="LAY-index-pagethree" lay-anim="fade" style="width: 100%; height: 280px;">
+                                        <div carousel-item="" id="LAY-index-pagethree">
+                                            <div class="layui-this" _echarts_instance_="1541233807961" style="-webkit-tap-highlight-color: transparent; user-select: none; background-color: rgba(0, 0, 0, 0);">
+                                                <div style="position: relative; overflow: hidden; width: 706px; height: 332px;">
+                                                    <div data-zr-dom-id="bg" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 706px; height: 332px; user-select: none;"></div><canvas width="706" height="332" data-zr-dom-id="0" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 706px; height: 332px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas>
+                                                    <canvas width="706" height="332" data-zr-dom-id="1" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 706px; height: 332px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas>
+                                                    <canvas width="706" height="332" data-zr-dom-id="_zrender_hover_" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 706px; height: 332px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} {% block javascript %}
 <script>
     urlItemed("/Index");
 </script>
 {% endblock %}
-

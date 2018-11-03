@@ -1,16 +1,12 @@
-{% extends '../Public/base.tpl' %}
-
-{% block css %}
+{% extends '../Public/base.tpl' %} {% block css %}
 <link rel="stylesheet" href="/public/css/res.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <style>
-    .my-nav a.nav-submenu:before{
+    .my-nav a.nav-submenu:before {
         display: none;
     }
 </style>
-{% endblock %}
-
-{% block body %}
+{% endblock %} {% block body %}
 <!--内容-->
 <div class="content">
     <div class="block">
@@ -40,7 +36,7 @@
                                 <dd><a href="#">jQuery</a></dd>
                                 <dd><a href="#">Node.js</a></dd>
                                 <dd><a href="#">Bootstrap</a></dd>
-                                <a style="float: right;margin-right: 20px;"  id="more" href="#">更多</a>
+                                <a style="float: right;margin-right: 20px;" id="more" href="#">更多</a>
                             </dl>
                         </li>
                         <li class="select-list" style="display: none;" id="tab-select4">
@@ -172,9 +168,7 @@
     </div>
 </div>
 
-{% endblock %}
-
-{% block javascript %}
+{% endblock %} {% block javascript %}
 <script src="https://cdn.bootcss.com/jquery/1.7/jquery.min.js"></script>
 <script type="text/javascript" src="/public/js/script.js"></script>
 {% endblock %}

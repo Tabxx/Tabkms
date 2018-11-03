@@ -1,18 +1,23 @@
-{% extends '../Public/admin/base.tpl' %} {% block main %}
+{% block css %}
+<link rel="stylesheet" href="/public/layui/css/layui.css">
+<link rel="stylesheet" href="/public/layui/css/modules/layer/default/layer.css" media="all">
+<link rel="stylesheet" href="/public/dist/style/admin.css" media="all">
+<link rel="stylesheet" href="/public/css/adminstyle.css"> {% endblock %} {% block main %}
 <div class="layui-card layadmin-header">
     <div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;">
         <a lay-href="">主页</a><span lay-separator="">/</span>
-        <a><cite>系统管理</cite></a><span lay-separator="">/</span>
-        <a><cite>菜单管理</cite></a><span lay-separator="">/</span>
-        <a><cite>编辑菜单</cite></a>
+        <a><cite>知识库管理</cite></a><span lay-separator="">/</span>
+        <a><cite>分类管理</cite></a><span lay-separator="">/</span>
+        <a><cite>新增顶级菜单</cite></a>
     </div>
 </div>
+
 
 <div class="layui-fluid">
     <div class="layui-card">
         <div class="layui-card-header layuiadmin-card-header-auto">
             <fieldset class="layui-elem-field layui-field-title site-title">
-                <legend><a name="bgcolor">添加部门</a></legend>
+                <legend><a name="bgcolor">添加顶级分类</a></legend>
             </fieldset>
         </div>
         <div class="layui-card-body">
@@ -29,10 +34,10 @@
                             <label class="layui-form-label">所属公司</label>
                             <div class="layui-input-inline">
                                 <select name="cid" lay-verify="required">
-                                    {% for item in companys %}
-                                    <option value="{{ item.id }}">{{ item.name }}</option>
-                                    {% endfor %}
-                                </select>
+                                        {% for item in companys %}
+                                        <option value="{{ item.id }}">{{ item.name }}</option>
+                                        {% endfor %}
+                                    </select>
                             </div>
                         </div>
 
@@ -51,37 +56,8 @@
 </div>
 
 {% endblock %} {% block javascript %}
+
 <script>
-    urlItemed('/department');
-
-
-
-    //Demo
-    layui.use('form', function() {
-        var form = layui.form;
-
-        //监听提交
-        form.on('submit(formDemo)', function(data) {
-            var index = layer.load(1, {
-                shade: [0.1, '#fff'] //0.1透明度的白色背景
-            });
-            $.post('/department/add', data.field, function(result) {
-                layer.close(index);
-
-                if (result.code) {
-
-                    layer.msg(result.msg, {
-                        icon: 1,
-                        time: 3000
-                    }, function() {
-                        location.href = result.url;
-                    });
-                } else {
-                    layer.msg(result.msg);
-                }
-            })
-            return false;
-        });
-    });
+    urlItemed('/classify');
 </script>
 {% endblock %}

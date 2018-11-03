@@ -1,22 +1,9 @@
-{% extends '../Public/admin/base.tpl' %}
-
-{% block css %}
-<link rel="stylesheet" href="/public/css/style.css">
-
-<style type="text/css">
-    .nav-tabs {
-        border: none;
-    }
-</style>
-
-{% endblock %}
-
-{% block main %}
+{% extends '../Public/admin/base.tpl' %} {% block main %}
 <div class="layui-card layadmin-header">
     <div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;">
         <a lay-href="">主页</a><span lay-separator="">/</span>
         <a><cite>知识库管理</cite></a><span lay-separator="">/</span>
-        <a><cite>分类管理</cite></a>
+        <a><cite>内容管理</cite></a>
     </div>
 </div>
 
@@ -136,16 +123,14 @@
                 </div>
 </div>-->
 
-{% endblock %}
-
-{% block javascript %}
+{% endblock %} {% block javascript %}
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs" lay-event="detail">查看详情</a>
 </script>
 <script>
-    urlItemed('/classify');
+    urlItemed('/knowmana');
 
-    layui.use(['laypage', 'table', 'layer'], function () {
+    layui.use(['laypage', 'table', 'layer'], function() {
         var laypage = layui.laypage;
         var table = layui.table;
         var layer = layui.layer;
@@ -189,7 +174,7 @@
             height: 500
         });
 
-        table.on('tool(test)', function (obj) {
+        table.on('tool(test)', function(obj) {
             let data = obj.data; //获得当前行数据
             let layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
 
@@ -202,7 +187,7 @@
                     maxmin: true, //开启最大化最小化按钮
                     area: ['893px', '600px'],
                     content: `/reptilian/detail?id=${data.id}`,
-                    end: function () {
+                    end: function() {
                         // var index = parent.layer.getFrameIndex(window.name);
                         parent.location.reload();
                     }
@@ -220,7 +205,7 @@
 
     layui.config({
         base: "public/layui/lay/mymodules/"
-    }).use(['jquery', 'eleTree'], function () {
+    }).use(['jquery', 'eleTree'], function() {
         var $ = layui.jquery;
         var eleTree = layui.eleTree;
 
@@ -235,25 +220,25 @@
             accordion: true
         });
 
-        eleTree.on("add(data1)", function (data) {
+        eleTree.on("add(data1)", function(data) {
             console.log(data);
             // 若后台修改，则重新获取后台数据，然后重载
             // eleTree.reload(".ele1", {where: {data: JSON.stringify(data.data)}})
         })
-        eleTree.on("edit(data1)", function (data) {
+        eleTree.on("edit(data1)", function(data) {
             console.log(data);
         })
-        eleTree.on("remove(data1)", function (data) {
+        eleTree.on("remove(data1)", function(data) {
             console.log(data);
         })
-        eleTree.on("toggleSlide(data1)", function (data) {
+        eleTree.on("toggleSlide(data1)", function(data) {
             console.log(data);
         })
-        eleTree.on("checkbox(data1)", function (data) {
+        eleTree.on("checkbox(data1)", function(data) {
             console.log(data);
         })
 
-        $(".layui-btn").on("click", function () {
+        $(".layui-btn").on("click", function() {
             console.log(eleTree.checkedData(".ele2"));
         })
     });

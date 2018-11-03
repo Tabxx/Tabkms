@@ -29,7 +29,10 @@ module.exports = app => {
     // 分类管理
     router.get('/classify', controller.admin.classify.manage);
     router.get('/classify/all', controller.admin.classify.knowlist);
+    router.get('/knowmana', controller.admin.classify.manage);
     router.get('/classify/tree', controller.admin.classify.tree);
+    router.get('/classify/list', controller.admin.classify.list);
+    router.post('/classify/add', controller.admin.classify.addClass);
 
     // 系统设置-前台菜单管理
     router.get('/homemenu', controller.admin.setup.menuManage);
