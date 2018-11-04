@@ -160,7 +160,6 @@ class KnowledgeController extends baseController {
         const kid = ctx.helper.escape(ctx.query.id);
 
         const content = await service.knowledge.getDetail(kid);
-        console.log(content);
         await ctx.service.knowledge.addBrowseNum(kid);
 
         await ctx.render('Knowledge/admindetail.tpl', {

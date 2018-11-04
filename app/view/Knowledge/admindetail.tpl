@@ -19,7 +19,11 @@
     <div class="layui-card layuiAdmin-msg-detail">
         <div class="layui-card-header">
             <h1>{{ detail.title }}</h1>
-            <p> <span>发布时间：{{ detail.createdate }}</span> <span>作者：{{ detail.author }}</span></p>
+            <p>
+                <span>发布时间：{{ detail.createdate }}</span>
+                <span>作者：{{ detail.author }}</span>
+                <span>浏览人数：{{ detail.browse_Number }}</span>
+            </p>
         </div>
         <div class="layui-card-body layui-text">
             <div class="layadmin-text block-content">

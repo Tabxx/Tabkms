@@ -34,8 +34,9 @@ class KnowledgeService extends Service {
 
         let offset = page == 1 ? 0 : (page - 1) * limit - 1;
 
-        let sql = `select k.id, k.title, k.content, k.createdate, k.browse_Number, k.status, k.author, u.id, u.username
-         from kms_knowledge k, kms_users u where k.author = u.id and k.status = ${status} limit ${(page - 1) * limit},${limit}`;
+        let sql = `select k.id, u.id as uid, c.id as cid, k.title, k.content, k.createdate, k.browse_Number, k.status, u.username, c.name as class
+         from kms_knowledge k, kms_users u , kms_classify c
+         where k.author = u.id and k.classids = c.id and k.status = ${status} limit ${(page - 1) * limit},${limit}`;
 
         // 数据库查询所有标签
         // let knows = await app.mysql.select('kms_knowledge', {

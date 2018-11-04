@@ -48,12 +48,17 @@
                         fixed: 'left'
                     }, {
                         field: 'title',
-                        width: '40%',
+                        width: '30%',
                         title: '标题',
                     }, {
                         field: 'username',
                         width: '10%',
                         title: '作者',
+                        sort: true
+                    }, {
+                        field: 'class',
+                        width: '10%',
+                        title: '分类',
                         sort: true
                     }, {
                         field: 'createdate',
@@ -75,7 +80,6 @@
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             var tr = obj.tr; //获得当前行 tr 的DOM对象
-            console.log(data);
             if (layEvent === 'detail') { //查看
                 layer.open({
                     type: 2,
