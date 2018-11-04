@@ -21,7 +21,7 @@
 {% endblock %} {% block javascript %}
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
-    <a class="layui-btn layui-btn-xs" lay-event="edit">通过</a>
+    <!-- <a class="layui-btn layui-btn-xs" lay-event="edit">通过</a> -->
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 <script>
@@ -91,7 +91,28 @@
                     }
                 });
             } else if (layEvent === 'del') { //删除
+                $.ajax({
+                    url: '/reptilian/del',
+                    type: 'get',
+                    data: {
+                        id: data.id
+                    },
+                    success(data) {
+                        if (data.errorcode === 0 && data.result) {
+                            layer.msg(data.msg, {
+                                icon: 1,
+                                time: 2000
+                            }, function() {
+                                location.reload();
+                            });
+                        } else {
+                            layer.msg(data.msg, {
+                                icon: 2,
+                            })
+                        }
 
+                    }
+                })
             } else if (layEvent === 'edit') { //编辑
 
             }

@@ -25,7 +25,7 @@ class KnowledgeService extends Service {
     /**
      * 管理员查询所有知识
      */
-    async getAllKonwledges(page, limit) {
+    async getAllKonwledges(page, limit, status = 0) {
 
         const {
             app,
@@ -34,14 +34,18 @@ class KnowledgeService extends Service {
 
         let offset = page == 1 ? 0 : (page - 1) * limit - 1;
 
+        let sql = `select k.id, k.title, k.content, k.createdate, k.browse_Number, k.status, k.author, u.id, u.username
+         from kms_knowledge k, kms_users u where k.author = u.id and k.status = ${status} limit ${(page - 1) * limit},${limit}`;
+
         // 数据库查询所有标签
-        let knows = await app.mysql.select('kms_knowledge', {
-            where: {
-                status: 1
-            }, // WHERE 条件
-            limit: parseInt(limit), // 返回数据量
-            offset: parseInt(offset), // 数据偏移量
-        });
+        // let knows = await app.mysql.select('kms_knowledge', {
+        //     where: {
+        //         status: 0
+        //     }, // WHERE 条件
+        //     limit: parseInt(limit), // 返回数据量
+        //     offset: parseInt(offset), // 数据偏移量
+        // });
+        let knows = await app.mysql.query(sql);
 
         // 去除row...
         knows = ctx.helper.toArr(knows);

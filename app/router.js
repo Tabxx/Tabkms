@@ -68,6 +68,7 @@ module.exports = app => {
 
     //知识详情
     router.get('/knowdetail', controller.home.knowledge.detail);
+    router.get('/admindetail', controller.home.knowledge.admindetail);
 
     // 知识标签
     router.get('/tags', controller.admin.tags.index);

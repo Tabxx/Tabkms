@@ -23,7 +23,7 @@ class ClassifyController extends baseController {
             page = 0, limit = 0
         } = ctx.query;
 
-        let knows = await service.knowledge.getAllKonwledges(page, limit);
+        let knows = await service.knowledge.getAllKonwledges(page, limit, 1);
         let count = await service.knowledge.getKonwledgeCount();
 
         if (knows !== null) {
@@ -72,6 +72,11 @@ class ClassifyController extends baseController {
         await ctx.render('Classify/tree.tpl');
     }
 
+    /**
+     * 添加分类
+     *
+     * @memberof ClassifyController
+     */
     async addClass() {
         const { ctx, app, service } = this;
 

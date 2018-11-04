@@ -1,6 +1,4 @@
-{% extends '../Public/admin/base.tpl' %}
-
-{% block main %}
+{% extends '../Public/admin/base.tpl' %} {% block main %}
 <div class="layui-card layadmin-header">
     <div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;">
         <a lay-href="">主页</a><span lay-separator="">/</span>
@@ -11,28 +9,23 @@
 
 <div class="layui-fluid">
     <div class="layui-card">
-        <!--<div class="layui-card-header layuiadmin-card-header-auto">
-            
-        </div>-->
         <div class="layui-card-body">
             <table id="demo" class="layui-table" lay-filter="test"></table>
             <div id="page"></div>
         </div>
     </div>
 </div>
-{% endblock %}
-
-{% block javascript %}
+{% endblock %} {% block javascript %}
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
-    <a class="layui-btn layui-btn-xs" lay-event="edit">通过</a>
+    <!-- <a class="layui-btn layui-btn-xs" lay-event="edit">通过</a> -->
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 
 <script>
     urlItemed('/examine');
 
-    layui.use(['laypage', 'table'], function () {
+    layui.use(['laypage', 'table'], function() {
         var laypage = layui.laypage;
         var table = layui.table;
 
@@ -57,7 +50,7 @@
                         width: '30%',
                         title: '标题',
                     }, {
-                        field: 'author',
+                        field: 'username',
                         width: '8%',
                         title: '作者',
                         sort: true
@@ -82,13 +75,25 @@
             height: 473
         });
 
-        table.on('tool(test)', function (obj) {
+        table.on('tool(test)', function(obj) {
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             var tr = obj.tr; //获得当前行 tr 的DOM对象
 
             if (layEvent === 'detail') { //查看
-                location.href = "/examine/detail?id=" + data.id;
+                layer.open({
+                    type: 2,
+                    title: `${data.title}`,
+                    shadeClose: true,
+                    shade: false,
+                    maxmin: true, //开启最大化最小化按钮
+                    area: ['893px', '600px'],
+                    content: `/examine/detail?id=${data.id}`,
+                    end: function() {
+                        // var index = parent.layer.getFrameIndex(window.name);
+                        // parent.location.reload();
+                    }
+                });
             } else if (layEvent === 'del') { //删除
 
             } else if (layEvent === 'edit') { //编辑

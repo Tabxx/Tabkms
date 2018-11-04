@@ -42,6 +42,7 @@
                     <div class="layui-form-item">
                         <div class="layui-input-block" id="app">
                             <button class="layui-btn" lay-submit lay-filter="formDemo" @click.prevent="postData">导入知识库</button>
+                            <button class="layui-btn layui-btn-danger no-through">删除</button>
                         </div>
                     </div>
                 </form>

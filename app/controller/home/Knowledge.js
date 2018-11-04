@@ -149,6 +149,25 @@ class KnowledgeController extends baseController {
         });
     }
 
+    /**
+     * 管理员知识详情
+     *
+     * @memberof KnowledgeController
+     */
+    async admindetail() {
+        const { app, ctx, service } = this;
+
+        const kid = ctx.helper.escape(ctx.query.id);
+
+        const content = await service.knowledge.getDetail(kid);
+        console.log(content);
+        await ctx.service.knowledge.addBrowseNum(kid);
+
+        await ctx.render('Knowledge/admindetail.tpl', {
+            detail: content
+        })
+    }
+
 }
 
 module.exports = KnowledgeController;
