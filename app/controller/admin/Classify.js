@@ -5,9 +5,13 @@ class ClassifyController extends baseController {
 
     async manage() {
         const {
-            ctx
+            ctx,
+            service
         } = this;
-        await ctx.render('Classify/manage.tpl');
+        const classify = await service.classify.getAllClass();
+        await ctx.render('Classify/manage.tpl', {
+            classify
+        });
     }
 
     /**
@@ -20,10 +24,19 @@ class ClassifyController extends baseController {
         } = this;
 
         const {
-            page = 0, limit = 0
+            page = 0, limit = 0, id, author, classid, title
         } = ctx.query;
+        let option = {
+            id,
+            author,
+            title,
+            classids: classid
+        }
+        if (!id && !title && !author && !classid) {
+            option = null;
+        }
 
-        let knows = await service.knowledge.getAllKonwledges(page, limit, 1);
+        let knows = await service.knowledge.getAllKonwledges(page, limit, 1, option);
         let count = await service.knowledge.getKonwledgeCount();
 
         if (knows !== null) {
@@ -67,7 +80,10 @@ class ClassifyController extends baseController {
      * @memberof ClassifyController
      */
     async list() {
-        const { ctx, app } = this;
+        const {
+            ctx,
+            app
+        } = this;
 
         await ctx.render('Classify/tree.tpl');
     }
@@ -78,12 +94,21 @@ class ClassifyController extends baseController {
      * @memberof ClassifyController
      */
     async addClass() {
-        const { ctx, app, service } = this;
+        const {
+            ctx,
+            app,
+            service
+        } = this;
 
         const reqType = ctx.request.method;
 
         if (reqType == 'POST') {
-            let { classname, pid = 0, type, id } = ctx.request.body;
+            let {
+                classname,
+                pid = 0,
+                type,
+                id
+            } = ctx.request.body;
             let result = {};
             let msg = '';
 

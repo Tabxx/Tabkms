@@ -25,7 +25,7 @@ class KnowledgeService extends Service {
     /**
      * 管理员查询所有知识
      */
-    async getAllKonwledges(page, limit, status = 0) {
+    async getAllKonwledges(page, limit, status = 0, where) {
 
         const {
             app,
@@ -33,10 +33,34 @@ class KnowledgeService extends Service {
         } = this;
 
         let offset = page == 1 ? 0 : (page - 1) * limit - 1;
+        let w = `k.author = u.id and k.classids = c.id and k.status = ${status}`;
+        if (where) {
+            for (let obj in where) {
+                if (where[obj]) {
+                    switch (obj) {
+                        case 'author':
+                            {
+                                w += ` and u.username = "${where[obj]}"`;
+                                break;
+                            }
+                        case 'title':
+                            {
+                                w += ` and k.title = "${where[obj]}"`;
+                                break;
+                            }
+                        default:
+                            {
+                                w += ` and k.${obj} = ${where[obj]}`;
+                                break;
+                            }
+                    }
+                }
+            }
+        }
 
         let sql = `select k.id, u.id as uid, c.id as cid, k.title, k.content, k.createdate, k.browse_Number, k.status, u.username, c.name as class
          from kms_knowledge k, kms_users u , kms_classify c
-         where k.author = u.id and k.classids = c.id and k.status = ${status} limit ${(page - 1) * limit},${limit}`;
+         where ${w} limit ${(page - 1) * limit},${limit}`;
 
         // 数据库查询所有标签
         // let knows = await app.mysql.select('kms_knowledge', {

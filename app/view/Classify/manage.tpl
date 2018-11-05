@@ -12,8 +12,46 @@
     <div class="layui-row">
         <div class="layui-col-md12">
             <div class="layui-card">
+                <div class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="app-content-list">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">文章ID</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">作者</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="author" placeholder="请输入" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">标题</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="title" placeholder="请输入" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">文章分类</label>
+                            <div class="layui-input-inline">
+                                <select name="classid">
+                                    <option value="">请选择标签</option>
+                                    {% for item in classify %}
+                                    <option value="{{ item.id }}">{{ item.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <button class="layui-btn layuiadmin-btn-list" lay-submit lay-filter="LAY-app-contlist-search">
+                                <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 <div class="layui-card-body">
-                    <table id="content" class="layui-hide" lay-filter="test"></table>
+                    <table id="content" class="layui-hide" lay-filter="test" lay-data="{id: 'idTest'}"></table>
                 </div>
             </div>
         </div>
@@ -28,9 +66,10 @@
     urlItemed('/knowmana');
     var layer = layui.layer;
 
-    layui.use(['laypage', 'table'], function() {
+    layui.use(['laypage', 'table'], function () {
         var laypage = layui.laypage;
         var table = layui.table;
+        var form = layui.form;
 
         table.render({
             elem: '#content',
@@ -46,6 +85,11 @@
                         type: 'checkbox',
                         sort: true,
                         fixed: 'left'
+                    }, {
+                        field: 'id',
+                        title: 'ID',
+                        width: '5%',
+                        sort: true,
                     }, {
                         field: 'title',
                         width: '30%',
@@ -76,7 +120,7 @@
             height: 500
         });
 
-        table.on('tool(test)', function(obj) {
+        table.on('tool(test)', function (obj) {
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             var tr = obj.tr; //获得当前行 tr 的DOM对象
@@ -89,7 +133,7 @@
                     maxmin: true, //开启最大化最小化按钮
                     area: ['893px', '600px'],
                     content: `/admindetail?id=${data.id}`,
-                    end: function() {
+                    end: function () {
                         // var index = parent.layer.getFrameIndex(window.name);
                         // parent.location.reload();
                     }
@@ -100,48 +144,17 @@
                 console.log("编辑");
             }
         });
+
+        //监听搜索
+        form.on('submit(LAY-app-contlist-search)', function (data) {
+            var field = data.field;
+            let where = field;
+
+            //执行重载
+            table.reload('content', {
+                where: field
+            });
+        });
     });
-
-
-
-    // layui.config({
-    //     base: "public/layui/lay/mymodules/"
-    // }).use(['jquery', 'eleTree'], function() {
-    //     var $ = layui.jquery;
-    //     var eleTree = layui.eleTree;
-
-    //     eleTree.render({
-    //         elem: '.ele1',
-    //         url: "/classify/tree?_csrf={{ ctx.csrf | safe }}",
-    //         type: "get",
-    //         // data: data,
-    //         showCheckbox: true,
-    //         contextmenuList: ["copy", "add", "edit", "remove"],
-    //         drag: true,
-    //         accordion: true
-    //     });
-
-    //     eleTree.on("add(data1)", function(data) {
-    //         console.log(data);
-    //         // 若后台修改，则重新获取后台数据，然后重载
-    //         // eleTree.reload(".ele1", {where: {data: JSON.stringify(data.data)}})
-    //     })
-    //     eleTree.on("edit(data1)", function(data) {
-    //         console.log(data);
-    //     })
-    //     eleTree.on("remove(data1)", function(data) {
-    //         console.log(data);
-    //     })
-    //     eleTree.on("toggleSlide(data1)", function(data) {
-    //         console.log(data);
-    //     })
-    //     eleTree.on("checkbox(data1)", function(data) {
-    //         console.log(data);
-    //     })
-
-    //     $(".layui-btn").on("click", function() {
-    //         console.log(eleTree.checkedData(".ele2"));
-    //     })
-    // });
 </script>
 {% endblock %}
