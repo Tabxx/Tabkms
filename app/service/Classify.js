@@ -7,7 +7,11 @@ class ClassifyService extends Service {
      * @returns {Promise<void>}
      */
     async getClass() {
-        let topClass = await this.app.mysql.select('kms_classify', { where: { pid: 0 } });
+        let topClass = await this.app.mysql.select('kms_classify', {
+            where: {
+                pid: 0
+            }
+        });
         topClass = JSON.stringify(topClass);
         topClass = JSON.parse(topClass);
 
@@ -15,7 +19,9 @@ class ClassifyService extends Service {
         for (let obj in topClass) {
             classArr[obj] = topClass[obj];
             const childClass = await this.app.mysql.select('kms_classify', {
-                where: { pid: topClass[obj].id }
+                where: {
+                    pid: topClass[obj].id
+                }
             });
             topClass[obj].child = childClass;
         }
@@ -39,15 +45,15 @@ class ClassifyService extends Service {
      * @returns {Promise<*>}
      */
     async getLists(type) {
+        const {
+            app,
+            ctx
+        } = this;
         let sql = 'SELECT a.*, b.username, c.name FROM kms_knowledge a, kms_users b, kms_classify c ' +
             'WHERE c.id = a.classids and a.author = b.id and a.classids = ? and a.status = ? order by createdate desc';
-        // let classLists = await this.app.mysql.select('kms_knowledge', {
-        //     where: {status: 1, classids: type},
-        //     orders: [['createdate','desc'], ['id','desc']],
-        // });
-        let classLists = await this.app.mysql.query(sql, [type, 1]);
+        let classLists = await app.mysql.query(sql, [type, 1]);
 
-        classLists = this.ctx.helper.toArr(classLists);
+        classLists = ctx.helper.toArr(classLists);
         return classLists;
     }
 
@@ -61,7 +67,10 @@ class ClassifyService extends Service {
     async addClass(name = '', pid = 0) {
         if (!name) return false;
 
-        const result = await this.app.mysql.insert('kms_classify', { name, pid });
+        const result = await this.app.mysql.insert('kms_classify', {
+            name,
+            pid
+        });
         return result.affectedRows === 1;
     }
 
@@ -93,6 +102,26 @@ class ClassifyService extends Service {
         return await this.app.mysql.delete('kms_classify', {
             id,
         });
+    }
+
+    async getSimilar(id) {
+        const {
+            app,
+            ctx
+        } = this;
+        // 获取父级id
+        let pclass = await app.mysql.get('kms_classify', {
+            id
+        });
+
+        // 获取同级菜单
+        let classes = await app.mysql.select('kms_classify', {
+            where: {
+                pid: pclass.pid
+            }
+        });
+
+        return ctx.helper.toArr(classes);
     }
 }
 

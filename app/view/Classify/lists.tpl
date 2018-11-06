@@ -18,25 +18,23 @@
                         <li class="select-list">
                             <dl id="select1">
                                 <dt>方向:</dt>
-                                <dd class="select-all selected"><a href="#">全部</a></dd>
-                                <dd><a href="#">前端技术</a></dd>
-                                <!--<dd class="select-all selected"><a href="#">前端技术</a></dd>-->
-                                <dd><a href="#">后端技术</a></dd>
-                                <dd><a href="#">移动模块</a></dd>
+                                <dd class="select-all"><a href="#">全部</a></dd>
+                                {% for item in similar %}
+                                {% if item.id == typeid %}
+                                <dd class="selected"><a href="###">{{ item.name }}</a></dd>
+                                {% else %}
+                                <dd><a href="classLists?type={{ item.id }}">{{ item.name }}</a></dd>
+                                {% endif %}
+                                {% endfor %}
                             </dl>
                         </li>
                         <li class="select-list">
                             <dl id="select2">
-                                <dt>前端技术:</dt>
+                                <dt>标签:</dt>
                                 <dd class="select-all selected"><a href="#">全部</a></dd>
-                                <dd><a href="#">HTML/CSS</a></dd>
-                                <dd><a href="#">JavaScript</a></dd>
-                                <dd><a href="#">HTML5</a></dd>
-                                <dd><a href="#">CSS3</a></dd>
-                                <dd><a href="#">jQuery</a></dd>
-                                <dd><a href="#">Node.js</a></dd>
-                                <dd><a href="#">Bootstrap</a></dd>
-                                <a style="float: right;margin-right: 20px;" id="more" href="#">更多</a>
+                                {% for item in tags %}
+                                <dd><a href="classLists?tag={{ item.id }}">{{ item.name }}</a></dd>
+                                {% endfor %}
                             </dl>
                         </li>
                         <li class="select-list" style="display: none;" id="tab-select4">
@@ -87,25 +85,32 @@
             <!-- END Select2 (Default forms) -->
             <div class="block block-bordered" style="margin-top: -20px">
                 <div class="block-header bg-gray-lighter">
-                    <h3 class="block-title">排序： <a href="">发布时间<span class="fa fa-unsorted"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a><a href="">浏览次数<span class="fa fa-unsorted"></span></a></h3>
+                    <h3 class="block-title">排序： <a href="">发布时间<span class="fa fa-unsorted"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a><a
+                            href="">浏览次数<span class="fa fa-unsorted"></span></a></h3>
                 </div>
                 {% for item in lists %}
                 <div class="block-content">
                     <a href="/knowdetail?id={{ item.id }}" style="font-size: 18px">{{ item.title }}</a>
                     <p>{{ item.summary }}</p>
-                    <p style="color: #999999">分类：{{ item.name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作者：{{ item.username }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发布时间：{{ item.createdate }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;浏览：{{ item.browse_Number }}</p>
+                    <p style="color: #999999">分类：{{ item.name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作者：{{ item.username
+                        }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发布时间：{{ item.createdate }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;浏览：{{
+                        item.browse_Number }}</p>
                 </div>
                 {% endfor %}
 
                 <div class="dataTables_paginate paging_full_numbers" id="DataTables_Table_2_paginate" style="margin-left: 40%">
                     <ul class="pagination">
-                        <li class="paginate_button first disabled" aria-controls="DataTables_Table_2" tabindex="0" id="DataTables_Table_2_first"><a href="#">First</a></li>
-                        <li class="paginate_button previous disabled" aria-controls="DataTables_Table_2" tabindex="0" id="DataTables_Table_2_previous"><a href="#"><i class="fa fa-angle-left"></i></a></li>
+                        <li class="paginate_button first disabled" aria-controls="DataTables_Table_2" tabindex="0" id="DataTables_Table_2_first"><a
+                                href="#">First</a></li>
+                        <li class="paginate_button previous disabled" aria-controls="DataTables_Table_2" tabindex="0"
+                            id="DataTables_Table_2_previous"><a href="#"><i class="fa fa-angle-left"></i></a></li>
                         <li class="paginate_button active" aria-controls="DataTables_Table_2" tabindex="0"><a href="#">1</a></li>
                         <li class="paginate_button " aria-controls="DataTables_Table_2" tabindex="0"><a href="#">2</a></li>
                         <li class="paginate_button " aria-controls="DataTables_Table_2" tabindex="0"><a href="#">3</a></li>
-                        <li class="paginate_button next" aria-controls="DataTables_Table_2" tabindex="0" id="DataTables_Table_2_next"><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                        <li class="paginate_button last" aria-controls="DataTables_Table_2" tabindex="0" id="DataTables_Table_2_last"><a href="#">Last</a></li>
+                        <li class="paginate_button next" aria-controls="DataTables_Table_2" tabindex="0" id="DataTables_Table_2_next"><a
+                                href="#"><i class="fa fa-angle-right"></i></a></li>
+                        <li class="paginate_button last" aria-controls="DataTables_Table_2" tabindex="0" id="DataTables_Table_2_last"><a
+                                href="#">Last</a></li>
                     </ul>
                 </div>
             </div>

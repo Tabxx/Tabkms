@@ -1,5 +1,12 @@
-$(document).ready(function(){
-							
+$(document).ready(function () {
+
+	$("#select1 dd").each(function (index, ele) {
+		if ($(ele).hasClass('selected')) {
+			$(".select-result dl").append($(ele).clone().attr("id", "selectA"));
+			$(".select-result .select-no").remove();
+		}
+	})
+
 	$("#select1 dd").click(function () {
 		$(this).addClass("selected").siblings().removeClass("selected");
 		if ($(this).hasClass("select-all")) {
@@ -13,7 +20,7 @@ $(document).ready(function(){
 			}
 		}
 	});
-	
+
 	$("#select2 dd").click(function () {
 		$(this).addClass("selected").siblings().removeClass("selected");
 		if ($(this).hasClass("select-all")) {
@@ -27,7 +34,7 @@ $(document).ready(function(){
 			}
 		}
 	});
-	
+
 	$("#select3 dd").click(function () {
 		$(this).addClass("selected").siblings().removeClass("selected");
 		if ($(this).hasClass("select-all")) {
@@ -55,17 +62,17 @@ $(document).ready(function(){
 			}
 		}
 	});
-	
+
 	$("#selectA").live("click", function () {
 		$(this).remove();
 		$("#select1 .select-all").addClass("selected").siblings().removeClass("selected");
 	});
-	
+
 	$("#selectB").live("click", function () {
 		$(this).remove();
 		$("#select2 .select-all").addClass("selected").siblings().removeClass("selected");
 	});
-	
+
 	$("#selectC").live("click", function () {
 		$(this).remove();
 		$("#select3 .select-all").addClass("selected").siblings().removeClass("selected");
@@ -75,7 +82,7 @@ $(document).ready(function(){
 		$(this).remove();
 		$("#select5 .select-all").addClass("selected").siblings().removeClass("selected");
 	});
-	
+
 	$(".select dd").live("click", function () {
 		if ($(".select-result dd").length > 1) {
 			$(".select-no").hide();
@@ -83,5 +90,5 @@ $(document).ready(function(){
 			$(".select-no").show();
 		}
 	});
-	
+
 });

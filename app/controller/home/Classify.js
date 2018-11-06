@@ -8,12 +8,27 @@ class ClassifyController extends Controller {
      * @returns {Promise<void>}
      */
     async lists() {
-        const ctx = this.ctx;
+        const {
+            ctx,
+            app,
+            service
+        } = this;
 
         // 分类id获取
         const type = ctx.helper.escape(ctx.request.query.type);
-        const lists = await ctx.service.classify.getLists(type);
-        await ctx.render('Classify/lists.tpl', { lists });
+        // 分类结果
+        const lists = await service.classify.getLists(type);
+        // 同级分类
+        const similar = await service.classify.getSimilar(type);
+        // 获取标签
+        const tags = await service.tags.getTags(1, 10);
+
+        await ctx.render('Classify/lists.tpl', {
+            lists,
+            similar,
+            typeid: type,
+            tags
+        });
     }
 
     async listsJson() {
