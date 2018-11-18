@@ -1,14 +1,9 @@
-{% extends '../Public/admin/base.tpl' %}
-
-{% block css %}
-{% endblock %}
-
-{% block main %}
+{% extends '../Public/admin/base.tpl' %} {% block css %} {% endblock %} {% block main %}
 <div class="layui-card layadmin-header">
     <div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;">
         <a lay-href="">主页</a><span lay-separator="">/</span>
         <a><cite>知识库管理</cite></a><span lay-separator="">/</span>
-        <a><cite>爬虫抓取</cite></a><span lay-separator="">/</span>
+        <a><cite>爬虫抓取</cite></a>
     </div>
 </div>
 
@@ -27,22 +22,19 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">爬取网址</label>
                             <div class="layui-input-block">
-                                <input type="text" name="url" required lay-verify="required" placeholder="请输入网址"
-                                    autocomplete="off" class="layui-input">
+                                <input type="text" name="url" required lay-verify="required" placeholder="请输入网址" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-form-item">
                             <label class="layui-form-label">规则</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="rule1" required lay-verify="required" placeholder="请输入规则"
-                                    autocomplete="off" class="layui-input">
+                                <input type="text" name="rule1" required lay-verify="required" placeholder="请输入规则" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-form-item">
                             <label class="layui-form-label">元素</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="element" required lay-verify="required" placeholder="请输入元素"
-                                    autocomplete="off" class="layui-input">
+                                <input type="text" name="element" required lay-verify="required" placeholder="请输入元素" autocomplete="off" class="layui-input">
                             </div>
                         </div>
 
@@ -59,10 +51,7 @@
         </div>
     </div>
 </div>
-{% endblock %}
-
-
-{% block javascript %}
+{% endblock %} {% block javascript %}
 
 <script>
     urlItemed('/reptilian');

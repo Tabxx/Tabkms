@@ -113,4 +113,12 @@ module.exports = app => {
     router.get('/score', controller.home.circle.score);
     router.get('/circleinformation', controller.home.circle.information);
     router.get('/circle/detail', controller.home.circle.detail);
+
+    // 知识专辑管理
+    router.get('/album', controller.admin.album.index);
+    router.get('/album/add', controller.admin.album.addAlbum);
+    router.get('/album/list', controller.admin.album.list);
+
+    // 上传图片
+    router.post('/upload/image', controller.admin.upload.uploadImg);
 };

@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="/public/layui/css/layui.css">
     <link rel="stylesheet" href="/public/layui/css/modules/layer/default/layer.css" media="all">
     <link rel="stylesheet" href="/public/dist/style/admin.css" media="all">
-    <link rel="stylesheet" href="/public/css/adminstyle.css"> {% block css %} {% endblock %}
+    <link rel="stylesheet" href="/public/css/adminstyle.css">
+    <link rel="stylesheet" href="/public/dist/style/template.css"> {% block css %} {% endblock %}
 </head>
 
 <body class="layui-layout-body" id="LAY_app">
