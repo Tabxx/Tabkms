@@ -168,6 +168,21 @@ class KnowledgeService extends Service {
             status: 1
         });
     }
+
+    /**
+     * 查询指定分类的知识
+     * @param {*} cid 
+     */
+    async getClassKnow(cid) {
+        let list = await this.app.mysql.select('kms_knowledge', {
+
+            where: {
+                classids: cid,
+            },
+        });
+        list = this.ctx.helper.toArr(list);
+        return list;
+    }
 }
 
 module.exports = KnowledgeService;

@@ -155,7 +155,11 @@ class KnowledgeController extends baseController {
      * @memberof KnowledgeController
      */
     async admindetail() {
-        const { app, ctx, service } = this;
+        const {
+            app,
+            ctx,
+            service
+        } = this;
 
         const kid = ctx.helper.escape(ctx.query.id);
 
@@ -165,6 +169,22 @@ class KnowledgeController extends baseController {
         await ctx.render('Knowledge/admindetail.tpl', {
             detail: content
         })
+    }
+
+    /**
+     * 获取指定分类的知识
+     */
+    async getClassKnowledge() {
+        const {
+            ctx,
+            service
+        } = this;
+        const cid = ctx.query.cid;
+        ctx.body = {
+            code: 0,
+            msg: 'success',
+            data: await service.knowledge.getClassKnow(cid)
+        }
     }
 
 }

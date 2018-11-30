@@ -79,11 +79,11 @@
                         classid: $('#example-select2').val(),
                         _csrf: crsftoken,
                     },
-                    success: function(data) {
+                    success: function (data) {
                         layer.msg(data.msg, {
                             icon: 1,
                             time: 1500
-                        }, function() {
+                        }, function () {
                             var index = parent.layer.getFrameIndex(window.name);
                             parent.layer.close(index);
                         });
@@ -104,7 +104,7 @@
                             layer.msg(data.msg, {
                                 icon: 1,
                                 time: 2000
-                            }, function() {
+                            }, function () {
                                 var index = parent.layer.getFrameIndex(window.name);
                                 parent.layer.close(index);
                                 parent.location.reload();

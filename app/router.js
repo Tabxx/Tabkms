@@ -69,6 +69,7 @@ module.exports = app => {
     //知识详情
     router.get('/knowdetail', controller.home.knowledge.detail);
     router.get('/admindetail', controller.home.knowledge.admindetail);
+    router.get('/getclassknow', controller.home.knowledge.getClassKnowledge);
 
     // 知识标签
     router.get('/tags', controller.admin.tags.index);
@@ -117,8 +118,13 @@ module.exports = app => {
     // 知识专辑管理
     router.get('/album', controller.admin.album.index);
     router.get('/album/add', controller.admin.album.addAlbum);
+    router.post('/album/add', controller.admin.album.addAlbum);
     router.get('/album/list', controller.admin.album.list);
+    router.get('/album/admindetail', controller.admin.album.ablumDetail);
 
     // 上传图片
     router.post('/upload/image', controller.admin.upload.uploadImg);
+
+    // 员工信息
+    router.get('/getUserClass', controller.admin.user.userClass);
 };
