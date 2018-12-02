@@ -1,14 +1,15 @@
-{% extends '../Public/admin/base.tpl' %} {% block css %} <style>
+{% extends '../Public/admin/base.tpl' %} {% block css %}
+<style>
     .album-image {
         width: 100%;
         height: 150px;
     }
-
+    
     .cmdlist-text .info {
         height: auto;
         font-size: 16px;
     }
-
+    
     .price {
         overflow: hidden;
         text-overflow: ellipsis;
@@ -41,9 +42,7 @@
                 <a href="javascript:;">
                     <div class="cmdlist-text">
                         <p class="info"><b>{{ item.name }}</b></p>
-                        <div class="price">
-                            {{ item.intro }}
-                        </div>
+                        <div class="price">{{ item.intro | replace(r/<[^<>]+>/g,"") | safe }}</div>
                     </div>
                 </a>
             </div>
@@ -68,7 +67,7 @@
 <script>
     urlItemed('/album');
 
-    layui.use(['laypage', 'layer'], function () {
+    layui.use(['laypage', 'layer'], function() {
         var laypage = layui.laypage;
         var layer = layui.layer;
 
@@ -79,7 +78,7 @@
             location.href = '/album/add'
         });
 
-        $('.detail').click(function (event) {
+        $('.detail').click(function(event) {
             let aid = $(this).attr('data-id');
 
             layer.open({
@@ -90,7 +89,7 @@
                 maxmin: true, //开启最大化最小化按钮
                 area: ['893px', '600px'],
                 content: `/album/admindetail?id=${aid}`,
-                end: function () {
+                end: function() {
                     // parent.location.reload();
                 }
             });

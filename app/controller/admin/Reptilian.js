@@ -118,7 +118,7 @@ class ReptilianController extends adminBase {
         };
 
 
-        const result = await service.knowledge.addKnowledge(knowdata);
+        const result = await service.knowledge.addKnowledge(knowdata, 1);
         this.success('/reptilian/lists', '添加成功！', result);
     }
 

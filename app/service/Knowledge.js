@@ -7,7 +7,7 @@ class KnowledgeService extends Service {
      * @param knowledge
      * @returns {Promise<boolean>}
      */
-    async addKnowledge(knowledge) {
+    async addKnowledge(knowledge, status = 0) {
         const enclosure = typeof knowledge.enclosure === "undefined" ? ' ' : knowledge.enclosure.toString();
         const result = await this.app.mysql.insert('kms_knowledge', {
             title: knowledge.title,
@@ -18,6 +18,7 @@ class KnowledgeService extends Service {
             enclosure: enclosure,
             tags: knowledge.tags,
             power: knowledge.power,
+            status
         });
         return result.affectedRows === 1;
     }

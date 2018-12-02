@@ -107,7 +107,7 @@ module.exports = app => {
     router.post('/Community/best', controller.home.community.bestAnswer);
 
     // 添加学习专辑
-    router.get('/learning/addAblum', controller.admin.study.addAblum);
+    // router.get('/learning/addAblum', controller.admin.study.addAblum);
 
     // 知识圈
     router.get('/circle', controller.home.circle.index);
@@ -127,4 +127,9 @@ module.exports = app => {
 
     // 员工信息
     router.get('/getUserClass', controller.admin.user.userClass);
+
+    // 学习中心
+    router.get('/learning', controller.home.learning.index);
+    router.get('/learning/detail', controller.home.learning.detail);
+    router.get('/learning/startstudy', controller.home.learning.study);
 };

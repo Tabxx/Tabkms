@@ -4,13 +4,13 @@
         width: 100%;
         height: 200px;
     }
-
+    
     .album-title {
         font-size: 20px;
         margin: 0 0 15px 0;
         font-weight: 700;
     }
-
+    
     .album-intro {
         overflow: hidden;
         text-overflow: ellipsis;
@@ -21,15 +21,15 @@
         max-height: 72px;
         padding: 10px 0;
     }
-
+    
     .ablum-detail {
         padding: 0 30px;
     }
-
+    
     .chapter-detail {
         margin: 30px 0;
     }
-
+    
     .charpter-tit {
         font-size: 16px;
         font-weight: bold !important;
@@ -56,9 +56,9 @@
                 <div class="layui-col-md4 layui-col-xs4">
                     <img class="album-img" src="{{ detail.image }}" alt="">
                 </div>
-                <div class="layui-col-md8 layui-col-xs4 ablum-detail">
+                <div class="layui-col-md8 layui-col-xs8 ablum-detail">
                     <h3 class="album-title">{{ detail.name }}</h3>
-                    <p class="album-intro">{{ detail.intro }}</p>
+                    <p class="album-intro">{{ detail.intro | replace(r/<[^<>]+>/g,"") | safe }}</p>
                     <p class="album-time">积分：{{ detail.integral }}</p>
                     <p class="album-time">{{ detail.starttime }}--{{ detail.endtime }}</p>
                 </div>
@@ -89,8 +89,7 @@
         </div>
     </div>
 </div>
-{% endblock %}
-{% block javascript %}
+{% endblock %} {% block javascript %}
 <script>
     urlItemed('/ablum');
 

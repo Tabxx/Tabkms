@@ -5,11 +5,15 @@ class AlbumService extends Service {
     /**
      * 获取知识专辑
      */
-    async getAlbum() {
+    async getAlbum(id) {
+        let where = {
+            status: 1
+        };
+        if (id) {
+            where.id = id;
+        }
         let result = await this.app.mysql.select('kms_album', {
-            where: {
-                status: 1
-            }
+            where
         });
 
         return this.ctx.helper.toArr(result);
@@ -131,6 +135,75 @@ class AlbumService extends Service {
         let sql = `select title from kms_knowledge where id in (${kids})`;
         let knowledges = await this.app.mysql.query(sql);
         return this.ctx.helper.toArr(knowledges);
+    }
+
+    /**
+     * 根据用户id获取该用户的必学知识
+     * @param {*} uid 
+     */
+    async getMustAlbum(uid) {
+        if (!uid) return false;
+
+        let sql = `select * from kms_album a, kms_album_user au where au.uid = ${uid} and au.aid = a.id`;
+        let mustAlbum = await this.app.mysql.query(sql);
+        return this.ctx.helper.toArr(mustAlbum);
+    }
+
+    /**
+     * 根据用户id和专辑id获取学习进度
+     * @param {*} uid 
+     * @param {*} aid 
+     */
+    async getAlbumProgress(uid, aid) {
+        let result = await this.app.mysql.get('kms_album_user', {
+            uid,
+            aid
+        });
+        return this.ctx.helper.toArr(result);
+    }
+
+    /**
+     * 开始学习
+     * @param {*} id 
+     * @param {*} aid 
+     * @param {*} uid 
+     */
+    async startStudy(id, aid, uid) {
+        const row = {
+            id,
+            aid,
+            uid,
+            status: 1
+        };
+        const result = await this.app.mysql.update('kms_album_user', row);
+
+        return result.affectedRows === 1;
+    }
+
+    /**
+     * 更新学习进度
+     * @param {*} aid 
+     * @param {*} cid 
+     * @param {*} uid 
+     */
+    async updateProgress(aid, cid, uid) {
+        // 获取当前进度
+        let old = await this.app.mysql.get('kms_album_user', { aid, uid });
+        let oldArray = this.ctx.helper.toArr(old);
+        let progress = oldArray.progress;
+        if (progress.split(',').indexOf(cid) > -1) {
+            return false;
+        }
+        progress = !progress ? cid : progress + `,${cid}`;
+
+        // 更新进度
+        const row = {
+            id: oldArray.id,
+            progress
+        };
+        const result = await this.app.mysql.update('kms_album_user', row);
+
+        return result.affectedRows === 1;
     }
 }
 

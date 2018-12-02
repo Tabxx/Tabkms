@@ -39,7 +39,8 @@ class UploadController extends Controller {
             "code": 0,
             "msg": "",
             "data": {
-                "src": 'http://' + ctx.request.host + '/public/upload/img/' + filename,
+                // "src": 'http://' + ctx.request.host + '/public/upload/img/' + filename,
+                "src": '/public/upload/img/' + filename,
             }
         }
     }

@@ -137,12 +137,18 @@ class KnowledgeController extends baseController {
      * @returns {Promise<void>}
      */
     async detail() {
-        this.init();
         const ctx = this.ctx;
 
         const kid = ctx.helper.escape(ctx.query.id);
         const content = await ctx.service.knowledge.getDetail(kid);
         await ctx.service.knowledge.addBrowseNum(kid);
+
+        // 知识专辑学习添加进度
+        const { aid, cid } = ctx.query;
+        const uid = this.ctx.session.user.uid;
+        if (aid && cid) {
+            await ctx.service.album.updateProgress(aid, cid, uid);
+        }
 
         await ctx.render('Knowledge/detail.tpl', {
             content
