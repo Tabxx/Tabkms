@@ -39,12 +39,18 @@
                         </div>
                     </div>
 
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">标签</label>
+                        <div class="layui-input-block" id="tag_ids2"></div>
+                    </div>
+
                     <div class="layui-form-item">
                         <div class="layui-input-block" id="app">
                             <button class="layui-btn" lay-submit lay-filter="formDemo" @click.prevent="postData">导入知识库</button>
                             <button class="layui-btn layui-btn-danger no-through">删除</button>
                         </div>
                     </div>
+
                 </form>
             </div>
         </div>
@@ -65,10 +71,32 @@
 {% endblock %} {% block javascript %}
 <script src="/public/js/vue.js"></script>
 <script>
+    layui.extend({
+        selectM: '/public/layui/layui_extends/selectM' // {/}的意思即代表采用自有路径，即不跟随 
+    });
+
     var layer = null;
-    layui.use(['layer'], function () {
+    layui.use(['layer', 'selectM'], function () {
         layer = layui.layer;
         var form = layui.form;
+        var selectM = layui.selectM;
+
+        //多选标签-所有配置
+        var tagIns2 = selectM({
+            //元素容器【必填】
+            elem: '#tag_ids2',
+            name: 'users',
+            data: '/pageTags?page=1&limit=30&select=1',
+            //值的分隔符
+            delimiter: ',',
+            //候选项数据的键名
+            field: {
+                idName: 'id',
+                titleName: 'name'
+            }
+        });
+
+        form.render();
     });
 
     // 返回上一级
@@ -106,6 +134,7 @@
                     data: {
                         kid: `{{ detail.id }}`,
                         classid: $('#example-select2').val(),
+                        tags: ''
                         _csrf: crsftoken,
                     },
                     success: function (data) {

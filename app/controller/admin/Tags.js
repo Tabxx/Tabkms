@@ -56,19 +56,25 @@ class TagsController extends AdminBaseController {
     async pageTags(){
         const ctx = this.ctx;
 
-        let page = ctx.query.page;
-        let limit = ctx.query.limit;
+        // let page = ctx.query.page;
+        // let limit = ctx.query.limit;
+        let {page, limit, select} = ctx.query;
 
         const tags = await ctx.service.tags.getTags(page, limit);
         const count = await ctx.service.tags.getTagsCount();
 
         if (tags !== null) {
-            ctx.body = {
-                code: 0,
-                msg: '',
-                count,
-                data: tags,
+            if(select){
+                ctx.body = tags;
+            } else {
+                ctx.body = {
+                    code: 0,
+                    msg: '',
+                    count,
+                    data: tags,
+                }
             }
+            
         } else {
             ctx.body = {
                 'msg': '数据获取异常！',
