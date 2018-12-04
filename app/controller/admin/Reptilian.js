@@ -110,7 +110,7 @@ class ReptilianController extends adminBase {
         let knowdata = {
             title: detail.title,
             classids: classId,
-            tags: '',
+            tags: ctx.request.body.tags,
             content: detail.comment,
             enclosure: '',
             power: 0,

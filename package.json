@@ -16,6 +16,7 @@
     "he": "^1.1.1",
     "jsonwebtoken": "^8.3.0",
     "md5": "^2.2.1",
+    "moment": "^2.22.2",
     "stream-wormhole": "^1.0.3",
     "superagent": "^3.8.3"
   },

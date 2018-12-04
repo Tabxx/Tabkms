@@ -1,4 +1,5 @@
 const Service = require('egg').Service;
+const moment = require('moment');
 
 class AlbumService extends Service {
 
@@ -76,6 +77,7 @@ class AlbumService extends Service {
                 integral: params.integral,
                 chapters: cids.join(','),
                 image: params.image,
+                tags: params.tags,
                 status: 1
             });
 
@@ -87,7 +89,7 @@ class AlbumService extends Service {
                 let au = await app.mysql.insert('kms_album_user', {
                     aid,
                     uid,
-                    status: 1
+                    status: 0
                 });
             }
 
@@ -173,6 +175,7 @@ class AlbumService extends Service {
             id,
             aid,
             uid,
+            starttime: moment().format('YYYY-MM-DD HH:mm:ss'),
             status: 1
         };
         const result = await this.app.mysql.update('kms_album_user', row);
@@ -188,7 +191,10 @@ class AlbumService extends Service {
      */
     async updateProgress(aid, cid, uid) {
         // 获取当前进度
-        let old = await this.app.mysql.get('kms_album_user', { aid, uid });
+        let old = await this.app.mysql.get('kms_album_user', {
+            aid,
+            uid
+        });
         let oldArray = this.ctx.helper.toArr(old);
         let progress = oldArray.progress;
         if (progress.split(',').indexOf(cid) > -1) {
@@ -196,14 +202,26 @@ class AlbumService extends Service {
         }
         progress = !progress ? cid : progress + `,${cid}`;
 
+
         // 更新进度
         const row = {
             id: oldArray.id,
-            progress
+            progress,
+            starttime
         };
         const result = await this.app.mysql.update('kms_album_user', row);
 
         return result.affectedRows === 1;
+    }
+
+    /**
+     * 根据用户id返回正在学习的知识专辑
+     */
+    async getStudyingAlbum(uid) {
+        let sql = `select * from kms_album_user au, kms_album a where au.status = 1 and uid = ${uid} and au.aid = a.id`;
+
+        let studying = await this.app.mysql.query(sql);
+        return this.ctx.helper.toArr(studying);
     }
 }
 

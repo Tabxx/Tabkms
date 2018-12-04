@@ -135,6 +135,11 @@
                             <div class="layui-input-block" id="tag_ids2"></div>
                         </div>
 
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">标签</label>
+                            <div class="layui-input-block" id="tags"></div>
+                        </div>
+
                         <div class="layui-form-item">
                             <div class="layui-input-block">
                                 <button class="layui-btn" lay-submit="" lay-filter="*">立即提交</button>
@@ -253,6 +258,20 @@
             field: {
                 idName: 'uid',
                 titleName: 'username'
+            }
+        });
+
+        var tags = selectM({
+            //元素容器【必填】
+            elem: '#tags',
+            name: 'tags',
+            data: '/pageTags?page=1&limit=30&select=1',
+            //值的分隔符
+            delimiter: ',',
+            //候选项数据的键名
+            field: {
+                idName: 'id',
+                titleName: 'name'
             }
         });
 

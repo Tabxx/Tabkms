@@ -85,7 +85,7 @@
         var tagIns2 = selectM({
             //元素容器【必填】
             elem: '#tag_ids2',
-            name: 'users',
+            name: 'tags',
             data: '/pageTags?page=1&limit=30&select=1',
             //值的分隔符
             delimiter: ',',
@@ -128,13 +128,14 @@
                     return;
                 }
                 let crsftoken = Cookies.get('csrfToken');
+
                 $.ajax({
                     type: 'post',
                     url: '/reptilian/add',
                     data: {
                         kid: `{{ detail.id }}`,
                         classid: $('#example-select2').val(),
-                        tags: ''
+                        tags: $('input[name=tags]').val(),
                         _csrf: crsftoken,
                     },
                     success: function (data) {

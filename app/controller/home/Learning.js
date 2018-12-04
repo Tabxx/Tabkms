@@ -7,18 +7,23 @@ class LearningController extends baseController {
      * @returns {Promise<void>}
      */
     async index() {
-        const { ctx, service } = this;
+        const {
+            ctx,
+            service
+        } = this;
         // 全部知识专辑
         const album = await service.album.getAlbum();
 
         // 必学知识专辑
         const uid = ctx.session.user.uid;
         const mustAlbum = await service.album.getMustAlbum(uid);
+        const studying = await service.album.getStudyingAlbum(uid);
 
 
         await ctx.render('Learning/index.tpl', {
             album,
-            mustAlbum
+            mustAlbum,
+            studying
         });
     }
 
@@ -26,7 +31,10 @@ class LearningController extends baseController {
      * 知识专辑详情
      */
     async detail() {
-        const { ctx, service } = this;
+        const {
+            ctx,
+            service
+        } = this;
         // 专辑详情
         let album = await service.album.getAlbum(ctx.query.id);
         // 学习进度
@@ -41,14 +49,25 @@ class LearningController extends baseController {
             progress.chapter = nowPro ? chapters[nowPro - 1].name : chapters[nowPro].name;
         }
 
-        await ctx.render('/learning/detail.tpl', { album: album[0], chapters, progress });
+        await ctx.render('/learning/detail.tpl', {
+            album: album[0],
+            chapters,
+            progress
+        });
     }
 
     async study() {
-        const { ctx, service } = this;
+        const {
+            ctx,
+            service
+        } = this;
 
         if (ctx.request.method == 'GET') {
-            let { aid, uid, id } = ctx.request.query;
+            let {
+                aid,
+                uid,
+                id
+            } = ctx.request.query;
 
             let result = await service.album.startStudy(id, aid, uid);
             ctx.body = {
