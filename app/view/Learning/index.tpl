@@ -74,11 +74,13 @@
                                                     <img src="{{ study.image }}" class="pull-left" style="height: 100px;margin-right: 20px">
                                                     <div style="margin-bottom: 10px"><span style="font-size: 20px;font-weight: bolder">{{
                                                             study.name }}</span><span style="color: #898D91"> 更新完毕</span></div>
-                                                    <div style="margin-bottom: 10px"><span style="color: #DE4430;margin-right: 20px">已学26%</span><span
-                                                            style="color: #898D91;margin-right: 20px">用时5小时10分</span><span
-                                                            style="color: #898D91">学习至3-2 CSS position属性的具体应用</span></div>
+                                                    <div style="margin-bottom: 10px"><span style="color: #DE4430;margin-right: 20px">已学{{
+                                                            studying.progress[loop.index0].progress }}%</span><span
+                                                            style="color: #898D91;margin-right: 20px">开始时间：{{
+                                                            studying.progress[loop.index0].fromNow }}</span><span style="color: #898D91">学习至{{
+                                                            studying.progress[loop.index0].chapter }}</span></div>
                                                     <div style="margin-bottom: 10px"><span style="color: #898D91;margin-right: 50px">章节：{{
-                                                            study.chapters.length }}</span>
+                                                            study.chapters.split(',').length }}</span>
                                                         <a href="startlearning.html"><button class="btn btn-sm btn-success pull-right"
                                                                 type="button">继续学习</button></a>
                                                     </div>

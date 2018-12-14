@@ -14,28 +14,35 @@ class CommunityController extends baseController {
         const questions = await ctx.service.community.index();
 
         // 我的提问
-        const myques = await ctx.service.community.myQuestion(ctx.session.user.id);
-        await ctx.render('Community/index.tpl', { questions, myques });
+        const myques = await ctx.service.community.myQuestion(ctx.session.user.uid);
+        await ctx.render('Community/index.tpl', {
+            questions,
+            myques
+        });
     }
 
     /**
      * 提问
      * @returns {Promise<void>}
      */
-    async putQuestion(){
+    async putQuestion() {
         await this.init();
         const ctx = this.ctx;
 
         const question = ctx.request.body;
         try {
             ctx.validate({
-                title: {type: 'string'},
-                content: {type: 'string'}
+                title: {
+                    type: 'string'
+                },
+                content: {
+                    type: 'string'
+                }
             }, ctx.request.body);
 
             const result = await ctx.service.community.putQuestion(question);
 
-            if(result){
+            if (result) {
                 await ctx.redirect('/community');
             }
 
@@ -48,7 +55,7 @@ class CommunityController extends baseController {
      * 问题详情
      * @returns {Promise<void>}
      */
-    async detail(){
+    async detail() {
         await this.init();
         const ctx = this.ctx;
 
@@ -60,32 +67,38 @@ class CommunityController extends baseController {
         // 最佳回答
         const best = await ctx.service.community.best(parseInt(id));
 
-        if(detail){
+        if (detail) {
             // 浏览数+1
             await ctx.service.community.addBrowseNum(id);
 
         }
 
-        await ctx.render('Community/detail.tpl', { detail, answers, best });
+        await ctx.render('Community/detail.tpl', {
+            detail,
+            answers,
+            best
+        });
     }
 
     /**
      * 回答问题
      * @returns {Promise<void>}
      */
-    async answer(){
+    async answer() {
         await this.init();
         const ctx = this.ctx;
 
-        try{
+        try {
             ctx.validate({
-                answer: {type: 'string'},
+                answer: {
+                    type: 'string'
+                },
             }, ctx.request.body);
 
             const answer = ctx.request.body;
 
             const result = await ctx.service.community.answer(answer);
-            if(result){
+            if (result) {
                 this.success('', '评论成功', 1);
             } else {
                 this.success('', '评论失败', 0);
@@ -100,14 +113,15 @@ class CommunityController extends baseController {
      * 最佳回答
      * @returns {Promise<void>}
      */
-    async bestAnswer(){
+    async bestAnswer() {
         this.init();
         const ctx = this.ctx;
 
         const data = ctx.request.body;
+
         const result = ctx.service.community.bestAnswer(data);
 
-        if(result){
+        if (result) {
             this.success('', '设置成功', 1);
         }
     }

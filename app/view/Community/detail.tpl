@@ -3,26 +3,30 @@
 {% block css %}
 <link rel="stylesheet" href="/public/assets/js/plugins/simplemde/simplemde.min.css">
 <style type="text/css">
-    .item{
+    .item {
         width: 40px;
         height: 40px;
         font-size: 20px;
         line-height: 40px;
     }
-    .font-s16{
+
+    .font-s16 {
         font-size: 16px !important;
         line-height: 26px;
         color: #444;
         margin-top: 4px;
     }
-    .CodeMirror{
+
+    .CodeMirror {
         max-height: 100px;
         min-height: 100px;
     }
-    .my-nav a.nav-submenu:before{
+
+    .my-nav a.nav-submenu:before {
         display: none;
     }
-    .tab-ans{
+
+    .tab-ans {
         margin: 10px 0 !important;
     }
 </style>
@@ -62,11 +66,16 @@
     {% if best.length %}
     <div class="row tab-bestRow" style="background-color: #fff;margin-top: 10px;padding: 15px;">
         <div class="block-header bg-gray-lighter">
-            <h3 class="block-title"><span class="si si-badge" style="color: #5EB262;font-size: 20px;font-weight: bolder;"> 最佳回答</span><span class="pull-right" style="color: #939293;font-size: 12px;font-weight: lighter;">推荐于 {{ best[0].time }}</span></h3>
+            <h3 class="block-title"><span class="si si-badge" style="color: #5EB262;font-size: 20px;font-weight: bolder;">
+                    最佳回答</span><span class="pull-right" style="color: #939293;font-size: 12px;font-weight: lighter;">推荐于
+                    {{ best[0].time }}</span></h3>
         </div>
         <div class="block-content">
             <p style="font-size: 15px">{{ best[0].answer }}</p>
-            <a href=""><span class="si si-speech pull-right" style="color: #5EB262;font-size: 18px;margin-left: 20px"> 12</span></a><a href=""><span class="fa fa-thumbs-o-down pull-right" style="color: #5EB262;font-size: 18px;margin-left: 20px"> 6</span></a><a href=""><span class="fa fa-thumbs-o-up pull-right" style="color: #5EB262;font-size: 18px"> 26</span></a>
+            <a href=""><span class="si si-speech pull-right" style="color: #5EB262;font-size: 18px;margin-left: 20px">
+                    12</span></a><a href=""><span class="fa fa-thumbs-o-down pull-right" style="color: #5EB262;font-size: 18px;margin-left: 20px">
+                    6</span></a><a href=""><span class="fa fa-thumbs-o-up pull-right" style="color: #5EB262;font-size: 18px">
+                    26</span></a>
         </div>
     </div>
     {% endif %}
@@ -85,7 +94,7 @@
                 </ul>
                 <form action="" class="answer">
                     <textarea id="simplemde" name="answer"></textarea>
-                    <input type="hidden" name="id" value="{{ ctx.session.user.id }}" />
+                    <input type="hidden" name="id" value="{{ ctx.session.user.uid }}" />
                     <input type="hidden" name="qid" value="{{ detail.id }}" />
                     <button class="btn btn-minw btn-primary pull-right" id="ask_btn" type="button">提交回答</button>
                 </form>
@@ -97,8 +106,9 @@
                     <a class="item item-rounded pull-left push-10-r bg-info" href="javascript:void(0)">
                         <i class="si si-rocket text-white-op"></i>
                     </a>
-                    {% if item.author != ctx.session.user.id %}
-                        <button class="btn btn-primary pull-right tab-best" data-id="{{ detail.id }}" data-aid="{{ item.id }}" type="button"><i class="fa fa-thumbs-up"></i> 最佳回答</button>
+                    {% if item.author != ctx.session.user.uid %}
+                    <button class="btn btn-primary pull-right tab-best" data-id="{{ detail.id }}" data-aid="{{ item.id }}"
+                        type="button"><i class="fa fa-thumbs-up"></i> 最佳回答</button>
                     {% endif %}
                     <h5 class="push-5-t">{{ item.username }}</h5>
                     <div class="font-s13 si si-diamond" style="margin: 3px 7px;color: #E6D224"></div>
@@ -147,20 +157,21 @@
 <script src="/public/assets/js/plugins/select2/select2.full.min.js"></script>
 <script src="/public/assets/js/plugins/simplemde/simplemde.min.js"></script>
 <script>
-
     jQuery(function () {
         // Init page helpers (BS Maxlength + Select2 + Tags Inputs + CKEditor + Appear + CountTo plugins)
-        App.initHelpers(['maxlength', 'select2', 'simplemde', 'tags-inputs', 'ckeditor', 'appear', 'appear-countTo']);
+        App.initHelpers(['maxlength', 'select2', 'simplemde', 'tags-inputs', 'ckeditor', 'appear',
+            'appear-countTo'
+        ]);
     });
     var simplemde = new SimpleMDE({
         element: document.getElementById("simplemde"),
         autoDownloadFontAwesome: false,
         status: false
     });
-    $('#ask').click(function(){
+    $('#ask').click(function () {
         $('.tab-ask').show();
     });
-    $('#ask_btn').click(function(){
+    $('#ask_btn').click(function () {
         $.ajax({
             type: 'POST',
             url: '/Community/answer',
@@ -170,8 +181,9 @@
                 answer: simplemde.value(),
                 qid: $('.answer input[name=qid]').val()
             },
-            success: function(result){
+            success: function (result) {
                 alert(result.msg);
+                location.reload();
             }
         })
     });
@@ -185,7 +197,7 @@
                 aid: $(this).attr('data-aid'),
                 _csrf: Cookies.get('csrfToken')
             },
-            success: function(result){
+            success: function (result) {
                 location.reload();
             }
         })

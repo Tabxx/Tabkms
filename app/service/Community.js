@@ -6,7 +6,7 @@ class CommunityService extends Service {
      * 知识社区首页
      * @returns {Promise<*>}
      */
-    async index(){
+    async index() {
         let sql = 'SELECT a.*, b.username FROM kms_question a, kms_users b ' +
             'WHERE a.author = b.id order by createdate desc';
 
@@ -21,11 +21,15 @@ class CommunityService extends Service {
      * @param id
      * @returns {Promise<void>}
      */
-    async myQuestion(id){
+    async myQuestion(id) {
         let question = await this.app.mysql.select('kms_question', {
-            where: {author: id},
+            where: {
+                author: id
+            },
             limit: 4,
-            orders: [['createdate','desc']],
+            orders: [
+                ['createdate', 'desc']
+            ],
         });
 
         question = this.ctx.helper.toArr(question);
@@ -38,10 +42,10 @@ class CommunityService extends Service {
      * @param question
      * @returns {Promise<void>}
      */
-    async putQuestion(question){
+    async putQuestion(question) {
         const result = await this.app.mysql.insert('kms_question', {
             title: question.title,
-            author: parseInt(this.ctx.session.user.id),
+            author: parseInt(this.ctx.session.user.uid),
             createdate: this.app.mysql.literals.now,
             content: question.content,
         });
@@ -53,8 +57,10 @@ class CommunityService extends Service {
      * @param id
      * @returns {Promise<*>}
      */
-    async detail(id){
-        let detail = await this.app.mysql.get('kms_question', {id});
+    async detail(id) {
+        let detail = await this.app.mysql.get('kms_question', {
+            id
+        });
 
         detail = this.ctx.helper.toArr(detail);
         return detail;
@@ -65,7 +71,7 @@ class CommunityService extends Service {
      * @param id
      * @returns {Promise<boolean>}
      */
-    async addBrowseNum(id){
+    async addBrowseNum(id) {
         const sql = 'update kms_question set browse_Number=browse_Number+1 where id = ?'
 
         const result = await this.app.mysql.query(sql, [id]);
@@ -76,7 +82,7 @@ class CommunityService extends Service {
      * 提问
      * @returns {Promise<void>}
      */
-    async answer(answer){
+    async answer(answer) {
 
         const result = await this.app.mysql.beginTransactionScope(async conn => {
             await this.app.mysql.insert('kms_answer', {
@@ -86,7 +92,9 @@ class CommunityService extends Service {
                 qid: parseInt(answer.qid)
             });
 
-            return { success: true };
+            return {
+                success: true
+            };
         }, this.ctx);
 
         return result;
@@ -99,7 +107,7 @@ class CommunityService extends Service {
      */
     async getAnswer(id) {
 
-        let sql = 'SELECT a.*, b.username, b.id FROM kms_answer a, kms_users b ' +
+        let sql = 'SELECT a.*, b.username, b.id as uid FROM kms_answer a, kms_users b ' +
             'WHERE a.author = b.id AND qid = ? AND a.status = 0 order by time desc';
         let answers = await this.app.mysql.query(sql, [id]);
 
@@ -112,14 +120,17 @@ class CommunityService extends Service {
      * @param data
      * @returns {Promise<void>}
      */
-    async bestAnswer(data){
+    async bestAnswer(data) {
+        console.log(data);
         const result = await this.app.mysql.beginTransactionScope(async conn => {
             const row = {
                 id: parseInt(data.aid),
                 status: 1,
             };
             await conn.update('kms_answer', row);
-            return { success: true };
+            return {
+                success: true
+            };
         }, this.ctx);
 
         return result;
@@ -130,7 +141,7 @@ class CommunityService extends Service {
      * @param id
      * @returns {Promise<*>}
      */
-    async best(id){
+    async best(id) {
         let sql = 'SELECT * FROM kms_answer ' +
             'WHERE qid = ? AND status = 1';
         let answers = await this.app.mysql.query(sql, [id]);

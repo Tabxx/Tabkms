@@ -14,7 +14,8 @@
         </div>
     </div>
     <div class="block-content" style="height: 55px">
-        <span style="font-weight: bolder;color: #51A6F3;margin-right: 5%;cursor: pointer">肖晶</span><span style="color: #979797;margin-right: 5%;cursor: pointer">发表于：2018.01.04</span><span style="color: #979797;margin-right: 5%;cursor: pointer">最后回复：4天前</span><span style="color: #979797;margin-right: 5%;cursor: pointer">阅读：8</span>
+        <span style="font-weight: bolder;color: #51A6F3;margin-right: 5%;cursor: pointer">肖晶</span><span style="color: #979797;margin-right: 5%;cursor: pointer">发表于：2018.01.04</span><span
+            style="color: #979797;margin-right: 5%;cursor: pointer">最后回复：4天前</span><span style="color: #979797;margin-right: 5%;cursor: pointer">阅读：8</span>
     </div>
 </div>
 
@@ -34,15 +35,15 @@
             html全称为HyperText Mackeup Language，译为<span style="color: #0000FF;font-weight: bold;">超文本标记语言</span>，不是一种编程语言，是一种描述性的标记语言，用于描述超文本中内容的显示方式。比如字体什么颜色，大小等。<br />
             <span class="tab-span-2em"></span>超文本：音频，视频，图片称为超文本。<br />
             <span class="tab-span-2em"></span>标记 ：<英文单词或者字母>称为标记，一个HTML页面都是由各种标记组成。<br />
-            <span class="tab-span-2em"></span><b>作用：</b>HTML是负责描述文档语义的语言。<br />
-            <span class="tab-span-2em"></span>注意：HTML语言不是一个编程语言(有编译过程)，而是一个标记语言(<span style="color: #0000FF;font-weight: bold;">没有编译过程</span>)，HTML页面直接由浏览器解析执行。<br/>
+                <span class="tab-span-2em"></span><b>作用：</b>HTML是负责描述文档语义的语言。<br />
+                <span class="tab-span-2em"></span>注意：HTML语言不是一个编程语言(有编译过程)，而是一个标记语言(<span style="color: #0000FF;font-weight: bold;">没有编译过程</span>)，HTML页面直接由浏览器解析执行。<br />
 
-            <span class="tab-span-2em"></span><b>HTML是负责描述文档语义的语言</b><br>
+                <span class="tab-span-2em"></span><b>HTML是负责描述文档语义的语言</b><br>
 
-            <span class="tab-span-2em"></span>html中，除了语义，其他什么都没有。
+                <span class="tab-span-2em"></span>html中，除了语义，其他什么都没有。
 
-            html是一个纯本文文件（就是用txt文件改名而成），用一些标签来描述文字的语义，这些标签在浏览器里面是看不到的，所以称为“超文本”，所以就是“超文本标记语言”了。
-            所以，接下来，我们肯定要学习一堆html中的标签对儿，这些标签对儿能够给文本不同的语义。
+                html是一个纯本文文件（就是用txt文件改名而成），用一些标签来描述文字的语义，这些标签在浏览器里面是看不到的，所以称为“超文本”，所以就是“超文本标记语言”了。
+                所以，接下来，我们肯定要学习一堆html中的标签对儿，这些标签对儿能够给文本不同的语义。
         </p>
         <p style="text-indent: 2em;font-size: 16px;">
             <b>2、HTML的历史：</b><br>
@@ -68,8 +69,10 @@
         <span class="fa fa-thumbs-o-up" style="cursor: pointer;margin-right: 5%"> 5</span>
         <span class="fa fa-thumbs-o-down" style="cursor: pointer;margin-right: 5%"> 2</span>
         <span class="fa fa-star-o" style="cursor: pointer"> 4</span>
-        <a href="updatetopic.html"><button class="btn btn-sm btn-success pull-right" type="button" style="margin-left: 20px"><span class="fa fa-refresh"></span> 更新</button></a>
-        <a href="topiccorrect.html"><button class="btn btn-sm btn-danger pull-right" type="button" style="margin-left: 20px"><span class="fa fa-pencil-square-o"></span> 纠错</button></a>
+        <a href="/circle/update"><button class="btn btn-sm btn-success pull-right" type="button" style="margin-left: 20px"><span
+                    class="fa fa-refresh"></span> 更新</button></a>
+        <a href="/circle/correct"><button class="btn btn-sm btn-danger pull-right" type="button" style="margin-left: 20px"><span
+                    class="fa fa-pencil-square-o"></span> 纠错</button></a>
         <button id="guanzhu" class="btn btn-sm btn-primary pull-right" type="button">+ 关注</button>
     </div>
     <ul class="nav nav-tabs" data-toggle="tabs">
@@ -247,18 +250,20 @@
         <div class="block">
             <div class="block-content block-content-full">
                 <!-- DropzoneJS Container -->
-                <form class="dropzone dz-clickable" action="base_forms_pickers_more.html"><div class="dz-default dz-message"><span>点击或拖拽文档到此处上传</span></div></form>
+                <form class="dropzone dz-clickable" action="base_forms_pickers_more.html">
+                    <div class="dz-default dz-message"><span>点击或拖拽文档到此处上传</span></div>
+                </form>
             </div>
         </div>
         <div class="block">
-                                <span style="margin-left: 18px">
-                                    <label class="css-input css-checkbox css-checkbox-primary">
-                                        <input type="checkbox"><span></span> 匿名回复
-                                    </label>
-                                </span>
+            <span style="margin-left: 18px">
+                <label class="css-input css-checkbox css-checkbox-primary">
+                    <input type="checkbox"><span></span> 匿名回复
+                </label>
+            </span>
             <span>
-                                    <button class="btn btn-minw btn-primary pull-right" type="button" style="margin-right: 18px">回复</button>
-                                </span>
+                <button class="btn btn-minw btn-primary pull-right" type="button" style="margin-right: 18px">回复</button>
+            </span>
         </div>
     </div>
 </div>
@@ -286,7 +291,9 @@
 <script>
     jQuery(function () {
         // Init page helpers (BS Datepicker + BS Datetimepicker + BS Colorpicker + BS Maxlength + Select2 + Masked Input + Range Sliders + Tags Inputs plugins)
-        App.initHelpers(['datepicker', 'datetimepicker', 'colorpicker', 'maxlength', 'select2', 'masked-inputs', 'rangeslider', 'tags-inputs']);
+        App.initHelpers(['datepicker', 'datetimepicker', 'colorpicker', 'maxlength', 'select2', 'masked-inputs',
+            'rangeslider', 'tags-inputs'
+        ]);
     });
 </script>
 <!-- Page JS Plugins -->
@@ -304,15 +311,15 @@
     });
 </script>
 <script>
-    var n=1;
-    document.getElementById("guanzhu").onclick=function () {
-        n%=2;
-        if(n==1){
-            document.getElementById("guanzhu").setAttribute("class","btn btn-sm btn-warning pull-right");
-            document.getElementById("guanzhu").innerHTML="已关注";
-        }else{
-            document.getElementById("guanzhu").setAttribute("class","btn btn-sm btn-primary pull-right");
-            document.getElementById("guanzhu").innerHTML="+ 关注";
+    var n = 1;
+    document.getElementById("guanzhu").onclick = function () {
+        n %= 2;
+        if (n == 1) {
+            document.getElementById("guanzhu").setAttribute("class", "btn btn-sm btn-warning pull-right");
+            document.getElementById("guanzhu").innerHTML = "已关注";
+        } else {
+            document.getElementById("guanzhu").setAttribute("class", "btn btn-sm btn-primary pull-right");
+            document.getElementById("guanzhu").innerHTML = "+ 关注";
         }
         n++;
     }
