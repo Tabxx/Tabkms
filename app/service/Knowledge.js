@@ -184,6 +184,16 @@ class KnowledgeService extends Service {
         list = this.ctx.helper.toArr(list);
         return list;
     }
-}
 
+    /**
+     * 记录用户行为
+     * @param {*} uid 用户id
+     * @param {*} tid 知识id
+     */
+    async userAction(uid,tid){
+        const result = await this.app.mysql.insert('kms_action', { uid, tid });
+    }
+
+
+}
 module.exports = KnowledgeService;
