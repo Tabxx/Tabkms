@@ -51,8 +51,11 @@ class LearningService extends Service {
         let finalTags = [];
         topTwoTags.map(item=>finalTags.push(item.tid));
 
-        // 获取推荐专辑
-        
+        // 推荐学习专辑
+        let rsql = `select * from kms_album where tags like '%${finalTags[0]},%' or tags like '%$,{finalTags[0]}%'`;
+        let ralbum = await this.app.mysql.query(rsql);
+
+        return this.ctx.helper.toArr(ralbum);
     }
 
 
