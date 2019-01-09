@@ -16,6 +16,9 @@ class LearningController extends baseController {
     const studying = await service.album.getStudyingAlbum(uid);
     studying.progress = await service.album.calStudyProgress(studying, null, uid);
 
+    // 推荐知识
+    await service.learning.recommend(uid);
+
     await ctx.render('Learning/index.tpl', {
       album,
       mustAlbum,
