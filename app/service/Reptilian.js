@@ -17,7 +17,7 @@ class ReptilianService extends Service {
         // 删除数据库中旧数据
         myapp.mysql.delete('kms_webdata');
         superagent.get(cnodeUrl)
-            .end(function(err, res) {
+            .end(function (err, res) {
                 if (err) {
                     return console.error(err);
                 }
@@ -25,19 +25,23 @@ class ReptilianService extends Service {
                 var $ = cheerio.load(res.text);
 
                 // 设置所有的url
-                $('#feedlist_id h2 a').each(function(idx, element) {
+                $('#feedlist_id h2 a').each(function (idx, element) {
                     var $element = $(element);
                     var href = url.resolve(cnodeUrl, $element.attr('href'));
                     topicUrls.push(href);
+                    console.log($('#feedlist_id h2').length);
                 });
+
 
                 var ep = new eventproxy();
 
                 // 开始爬虫
-                ep.after('topic_html', topicUrls.length, function(topics) {
-                    topics = topics.map(function(topicPair) {
+                ep.after('topic_html', topicUrls.length, function (topics) {
+                    topics = topics.map(function (topicPair) {
                         var topicHtml = topicPair[1];
-                        var $ = cheerio.load(topicHtml, { decodeEntities: false });
+                        var $ = cheerio.load(topicHtml, {
+                            decodeEntities: false
+                        });
 
                         let obj = {
                             title: $('.title-article').text().trim(),
@@ -53,9 +57,9 @@ class ReptilianService extends Service {
                     });
                 });
 
-                topicUrls.forEach(function(topicUrl) {
+                topicUrls.forEach(function (topicUrl) {
                     superagent.get(topicUrl)
-                        .end(function(err, res) {
+                        .end(function (err, res) {
                             ep.emit('topic_html', [topicUrl, res.text]);
                         });
                 });
@@ -73,7 +77,9 @@ class ReptilianService extends Service {
 
         // 数据库查询所有标签
         let lists = await this.app.mysql.select('kms_webdata', {
-            where: { status: 1 }, // WHERE 条件
+            where: {
+                status: 1
+            }, // WHERE 条件
             limit: parseInt(limit), // 返回数据量
             offset: parseInt(offset), // 数据偏移量
         });
@@ -88,7 +94,9 @@ class ReptilianService extends Service {
      * @returns {Promise<*>}
      */
     async getDatasCount() {
-        return await this.app.mysql.count('kms_webdata', { status: 1 });
+        return await this.app.mysql.count('kms_webdata', {
+            status: 1
+        });
     }
 
     /**
@@ -97,7 +105,9 @@ class ReptilianService extends Service {
      * @returns {Promise<void>}
      */
     async getDetail(id) {
-        const detail = await this.app.mysql.get('kms_webdata', { id });
+        const detail = await this.app.mysql.get('kms_webdata', {
+            id
+        });
         return detail;
     }
 
@@ -108,7 +118,9 @@ class ReptilianService extends Service {
      * @memberof ReptilianService
      */
     async delWebData(id) {
-        const { app } = this;
+        const {
+            app
+        } = this;
         if (!id) return {
             error: 1,
             msg: 'id为空'
