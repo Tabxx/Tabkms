@@ -48,7 +48,6 @@ class ReptilianController extends adminBase {
         const {
             page = 0, limit = 0
         } = ctx.query;
-        this.init();
 
         const lists = await service.reptilian.getLists(page, limit);
         const count = await service.reptilian.getDatasCount();

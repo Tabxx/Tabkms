@@ -220,64 +220,23 @@
                         <div class="row">
                             <div class="col-lg-12" style="padding: 0">
                                 <div class="row">
-
+                                    {% for item in recommend %}
                                     <div class="col-sm-4 col-md-4 col-lg-4">
-                                        <!-- Crystal on Background Color -->
-                                        <a href="courseinformation2.html">
-                                            <div class="block" style="cursor: pointer">
-                                                <div class="bg-image" style="background-image: url('/public/pic/course/15.png');background-size: 100% 100%;height: 200px">
-                                                    <div class="block-content block-content-full ribbon ribbon-modern ribbon-success">
-                                                    </div>
-                                                </div>
+                                        <div class="block block-themed album-item">
+                                            <div>
+                                                <a href="/learning/detail?id={{item.id}}"><img src="{{ item.image }}"
+                                                        class="album-img"></a>
                                             </div>
-                                        </a>
-                                        <!-- END Crystal on Background Color -->
-                                        <div class="block-content" style="height: 110px">
-                                            <h3 style="font-size: 20px;margin-bottom: 5px;margin-top: -20px">JavaScrtpt
-                                                实现二叉树算法</h3>
-                                            <div><span style="font-size: 12px;color: #646464;font-weight: bolder">课程简介：</span><span
-                                                    style="font-size: 12px;color: #898D91">本案例展示了使用JavaScript来实现二叉树算法。</span></div>
-                                            <div><span style="font-size: 12px;color: #646464;font-weight: bolder">有效时间：</span><span
-                                                    style="font-size: 12px;color: #898D91">2017.05.21——2018.05.22</span></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4 col-md-4 col-lg-4">
-                                        <!-- Crystal on Background Color -->
-                                        <div class="block" style="cursor: pointer">
-                                            <div class="bg-image" style="background-image: url('/public/pic/course/19.png');background-size: 100% 100%;height: 200px">
-                                                <div class="block-content block-content-full ribbon ribbon-modern ribbon-success">
-
-                                                </div>
+                                            <div class="block-content">
+                                                <h3 class="album-title">{{ item.name }}</h3>
+                                                <div class="item-row"><span class="album-label">课程简介：</span><span class="album-intro">{{
+                                                        item.intro | replace(r/<[^<>]+>/g,"") | safe }}</span></div>
+                                                <div class="item-row"><span class="album-label">有效时间：</span><span class="album-intro">{{
+                                                        item.starttime }}——{{ item.endtime }}</span></div>
                                             </div>
                                         </div>
-                                        <!-- END Crystal on Background Color -->
-                                        <div class="block-content" style="height: 110px">
-                                            <h3 style="font-size: 20px;margin-bottom: 5px;margin-top: -20px">前端性能优化</h3>
-                                            <div><span style="font-size: 12px;color: #646464;font-weight: bolder">课程简介：</span><span
-                                                    style="font-size: 12px;color: #898D91">学习前端性能优化，突破工作瓶颈。</span></div>
-                                            <div><span style="font-size: 12px;color: #646464;font-weight: bolder">有效时间：</span><span
-                                                    style="font-size: 12px;color: #898D91">2017.02.17——2018.02.18</span></div>
-                                        </div>
                                     </div>
-
-                                    <div class="col-sm-4 col-md-4 col-lg-4">
-                                        <!-- Crystal on Background Color -->
-                                        <div class="block" style="cursor: pointer">
-                                            <div class="bg-image" style="background-image: url('/public/pic/course/18.png');background-size: 100% 100%;height: 200px">
-                                                <div class="block-content block-content-full ribbon ribbon-modern ribbon-success">
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- END Crystal on Background Color -->
-                                        <div class="block-content" style="height: 110px">
-                                            <h3 style="font-size: 20px;margin-bottom: 5px;margin-top: -20px">Handlebars模板引擎</h3>
-                                            <div><span style="font-size: 12px;color: #646464;font-weight: bolder">课程简介：</span><span
-                                                    style="font-size: 12px;color: #898D91">使用Handlebars.js模板渲染页面。</span></div>
-                                            <div><span style="font-size: 12px;color: #646464;font-weight: bolder">有效时间：</span><span
-                                                    style="font-size: 12px;color: #898D91">2017.01.13——2018.01.14</span></div>
-                                        </div>
-                                    </div>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>

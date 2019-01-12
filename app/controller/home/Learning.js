@@ -6,7 +6,10 @@ class LearningController extends baseController {
    * @returns {Promise<void>}
    */
   async index() {
-    const { ctx, service } = this;
+    const {
+      ctx,
+      service
+    } = this;
     // 全部知识专辑
     const album = await service.album.getAlbum();
 
@@ -17,12 +20,13 @@ class LearningController extends baseController {
     studying.progress = await service.album.calStudyProgress(studying, null, uid);
 
     // 推荐知识
-    await service.learning.recommend(uid);
+    const recommend = await service.learning.recommend(uid);
 
     await ctx.render('Learning/index.tpl', {
       album,
       mustAlbum,
-      studying
+      studying,
+      recommend
     });
   }
 
@@ -30,7 +34,10 @@ class LearningController extends baseController {
    * 知识专辑详情
    */
   async detail() {
-    const { ctx, service } = this;
+    const {
+      ctx,
+      service
+    } = this;
     // 专辑详情
     let album = await service.album.getAlbum(ctx.query.id);
     // 学习进度
@@ -53,10 +60,17 @@ class LearningController extends baseController {
   }
 
   async study() {
-    const { ctx, service } = this;
+    const {
+      ctx,
+      service
+    } = this;
 
     if (ctx.request.method == 'GET') {
-      let { aid, uid, id } = ctx.request.query;
+      let {
+        aid,
+        uid,
+        id
+      } = ctx.request.query;
 
       let result = await service.album.startStudy(id, aid, uid);
       ctx.body = {

@@ -6,8 +6,6 @@ module.exports = (options, app) => {
             await ctx.redirect('/login');
             return;
         }
-
-
         await next();
     };
 };
